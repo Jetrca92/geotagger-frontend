@@ -1,0 +1,106 @@
+.customButton {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  width: 110px;
+  height: 36px;
+}
+
+.customPrimaryButton {
+  @extend .customButton;
+  background-color: #619b8a;
+  border: 1px solid #619b8a;
+  color: #ffffff;
+
+  &:hover {
+    background-color: #468579;
+    border-color: #468579;
+  }
+
+  &:disabled {
+    background-color: #d0f5df;
+    border: 1px solid #d0f5df;
+    color: #ffffff;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.customSecondaryButton {
+  @extend .customButton;
+  background-color: #ffffff;
+  border: 1px solid #619b8a;
+  color: #619b8a;
+
+  &:hover {
+    background-color: #f9fafb;
+    border: 1px solid #468579;
+    color: #619b8a;
+  }
+
+  &:disabled {
+    background-color: #ffffff;
+    color: #d0f5df;
+    border: 1px solid #e7faed;
+  }
+
+  &:active {
+    background-color: #e1eceb !important;
+    border: 1px solid #3f7569 !important;
+    color: #619b8a !important;
+  }
+
+  &:focus {
+    background-color: #e1eceb !important;
+    border-color: #3f7569 !important;
+    color: #619b8a !important;
+  }
+}
+
+.customEditButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+
+  background-color: #619b8a;
+  border: 1px solid #619b8a;
+
+  &:hover {
+    background-color: #468579;
+    border: 1px solid #468579;
+  }
+
+  &:disabled {
+    background-color: #d0f5df;
+    border: 1px solid #d0f5df;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.editIcon {
+  width: 20px;
+  height: 20px;
+}
