@@ -1,13 +1,12 @@
 .footerContainer {
   display: flex;
+  max-width: 1440px;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 60px;
   background: #619b8a;
   color: #ffffff;
-  padding-left: 71px;
-  padding-right: 71px;
 }
 
 .footerInner {
@@ -26,4 +25,15 @@
   font-size: 16px;
   font-weight: 400;
   line-height: 18.75px;
+  text-align: end;
+}
+
+.customCol {
+  padding: 0px;
+  margin: 0px;
+}
+
+.customContainer {
+  padding: 0px;
+  margin: 0px;
 }
