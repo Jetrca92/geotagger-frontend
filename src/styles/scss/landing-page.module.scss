@@ -1,20 +1,31 @@
 .heroContainer {
-  position: relative;
   margin-top: 68px;
   margin-bottom: 55px;
   padding: 0px;
 }
 
+.heroRow {
+  margin: 0px;
+  flex-wrap: nowrap;
+}
+
 .heroCard {
-  top: 256px;
+  margin-top: 96px;
+  padding: 0px;
   display: flex;
+  flex: 1;
   flex-direction: column;
   gap: 32px;
+  z-index: 2;
 }
 
 .heroImage {
+  display: flex;
+  flex: 1;
+  padding: 0px;
   width: 1040px;
   height: 585px;
+  margin-right: -71px;
 }
 
 .signUpHeroTitle {
@@ -34,4 +45,55 @@
   font-weight: 400;
   line-height: 18.75px;
   width: 419px;
+}
+
+.infoTextContainer {
+  margin-top: 56px;
+  margin-bottom: 64px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.infoTextTitle {
+  text-align: center;
+  color: #619b8a;
+  margin-bottom: 0px;
+}
+
+.infoTextSubtitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  width: 587px;
+  color: #233d4d;
+}
+
+.landingCards {
+  padding: 0px;
+}
+
+.landingCardsRow {
+  margin: 0px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.landingCardsCol {
+  padding: 0px;
+  width: 420px;
+  height: 235px;
+  flex: 0 0 auto;
+}
+
+.landingCardsButtonContainer {
+  @extend .landingCards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 167px;
 }

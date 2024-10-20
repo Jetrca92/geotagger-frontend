@@ -5,8 +5,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 
 const Footer: FC = () => {
   return (
-    <footer className={styles.footerContainer}>
-      <Container className={styles.customContainer}>
+    <Container className={styles.footerContainer}>
+      <footer className={styles.customFooter}>
         <Row className={styles.footerInner}>
           <Col xs={12} md={6} className={styles.customCol}>
             <img src={logo} className={styles.footerLeft} alt="logo" />
@@ -17,8 +17,8 @@ const Footer: FC = () => {
             </div>
           </Col>
         </Row>
-      </Container>
-    </footer>
+      </footer>
+    </Container>
   )
 }
 

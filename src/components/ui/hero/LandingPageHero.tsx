@@ -2,7 +2,7 @@ import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/landing-page.module.scss'
 import heroImage from 'styles/images/landing-page-background.png'
-import PrimaryButton from '../button/PrimaryButton'
+import PrimaryButton from 'components/ui/button/PrimaryButton'
 
 const LandingPageHero: FC = () => {
   return (
@@ -18,8 +18,8 @@ const LandingPageHero: FC = () => {
           </div>
           <PrimaryButton text="Sign up" />
         </Col>
-        <Col xs={12} md={9}>
-          <img src={heroImage} alt="Hero" className={styles.heroImage} />
+        <Col xs={12} md={9} className={styles.heroImage}>
+          <img src={heroImage} alt="Hero" />
         </Col>
       </Row>
     </Container>

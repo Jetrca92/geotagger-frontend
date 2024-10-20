@@ -7,8 +7,8 @@ import PrimaryButton from './button/PrimaryButton'
 
 const NavbarComponent: FC = () => {
   return (
-    <Navbar expand="lg" className={styles.customNavbar}>
-      <Container className={styles.navbarContainer}>
+    <Container className={styles.navbarContainer}>
+      <Navbar expand="lg" className={styles.customNavbar}>
         <Navbar.Brand className={styles.customContainers}>
           <img src={logoNavbar} className={styles.logoImage} alt="logo" />
         </Navbar.Brand>
@@ -20,14 +20,14 @@ const NavbarComponent: FC = () => {
         <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
           <Nav className={styles.navbarButtonsContainer}>
             <Link to="/" className={styles.signInLink}>
-              Sign In
+              Sign in
             </Link>
             <div className={styles.orText}>or</div>
             <PrimaryButton text="Sign up" />
           </Nav>
         </Navbar.Collapse>
-      </Container>
-    </Navbar>
+      </Navbar>
+    </Container>
   )
 }
 
