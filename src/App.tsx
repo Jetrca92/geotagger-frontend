@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import Home from 'pages/LandingPage'
+import Login from 'pages/LoginPage'
 
 const App: FC = () => {
   return (
     <>
-      <Home />
+      <Login />
     </>
   )
 }
