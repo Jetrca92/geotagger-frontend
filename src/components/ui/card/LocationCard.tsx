@@ -11,21 +11,22 @@ interface Props {
 const LocationCard: FC<Props> = ({ locked = false, imageSrc }) => {
   return (
     <Card className={styles.locationCard}>
-      <div className={`${styles.imageWrapper} ${locked ? styles.locked : ''}`}>
-        <Card.Img
-          variant="top"
-          src={imageSrc}
-          alt="card"
-          className={styles.locationCardImage}
-        />
-        {locked && (
-          <img
-            src={lockedIcon}
-            alt="Locked Icon"
-            className={styles.lockedIcon}
-          />
-        )}
-      </div>
+      <Card.Img
+        src={imageSrc}
+        alt="card"
+        className={styles.locationCardImage}
+      />
+      {locked && (
+        <Card.ImgOverlay>
+          <div className={styles.gradientOverlay}>
+            <img
+              src={lockedIcon}
+              alt="Locked Icon"
+              className={styles.lockedIcon}
+            />
+          </div>
+        </Card.ImgOverlay>
+      )}
     </Card>
   )
 }

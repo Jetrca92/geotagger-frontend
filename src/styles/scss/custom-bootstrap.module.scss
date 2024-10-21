@@ -111,21 +111,39 @@
   border: none;
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
+  position: relative;
 }
 
-.landingCardImage {
-  width: 100%;
-  height: 100%;
+.locationCardBody {
+  padding: 0px;
+  height: 235px;
+}
+
+.locationCardImage {
+  width: 420px;
+  height: 235px;
   object-fit: cover;
   display: block;
 }
 
-.imageWrapper {
-  position: relative;
-}
-
 .lockedIcon {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 45%;
+  left: 47%;
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(102, 159, 137, 0.6) 50%,
+    rgba(159, 193, 129, 0.6) 128%
+  );
+  z-index: 1;
+  pointer-events: none;
 }
