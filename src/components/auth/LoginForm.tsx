@@ -4,10 +4,10 @@ import styles from 'styles/scss/auth.module.scss'
 
 const LoginForm: FC = () => {
   return (
-    <Container className={styles.loginFormContainer}>
-      <div className={styles.loginFormTitleContainer}>
-        <h3 className={styles.loginFormTitle}>Sign in</h3>
-        <div className={styles.loginFormSubtitle}>
+    <Container className={styles.authFormContainer}>
+      <div className={styles.authFormTitleContainer}>
+        <h3 className={styles.authFormTitle}>Sign in</h3>
+        <div className={styles.authFormSubtitle}>
           Welcome back to Geotagger. We are glad that you are back.
         </div>
         <Form>
