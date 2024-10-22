@@ -100,9 +100,23 @@
   }
 }
 
+.customAddButton {
+  @extend .customEditButton;
+  height: 40px;
+  width: 40px;
+  border-radius: 64px;
+  padding: 0px;
+  margin: 0px;
+}
+
 .editIcon {
   width: 20px;
   height: 20px;
+}
+
+.addIcon {
+  width: 15px;
+  height: 15px;
 }
 
 .locationCard {
@@ -147,4 +161,62 @@
   );
   z-index: 1;
   pointer-events: none;
+}
+
+.customUserProfileButtonWithPoints {
+  width: 101px;
+  padding: 0px 16px 0px 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 64px;
+  border: 2px solid #619b8a;
+  background: #ffffff;
+
+  &:hover {
+    background-color: #ffffff;
+    border: 2px solid #468579;
+  }
+
+  &:active {
+    background-color: #ffffff !important;
+    border: 2px solid #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #ffffff !important;
+    border: 2px solid #3f7569 !important;
+  }
+}
+
+.customUserProfileButton {
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff;
+  border-radius: 64px;
+  border: 1px solid #ffffff;
+
+  &:hover {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  &:active {
+    background-color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+  }
+
+  &:focus {
+    background-color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+  }
+}
+
+.customUserProfilePoints {
+  color: #000000;
+  font-weight: 500;
+  width: 37px;
 }

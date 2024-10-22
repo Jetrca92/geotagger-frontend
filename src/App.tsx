@@ -1,14 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import Signup from 'pages/SignupPage'
+import NavbarComponent from 'components/ui/Navbar'
 
 const App: FC = () => {
-  return (
-    <>
-      <Signup />
-    </>
-  )
+  return <NavbarComponent />
 }
 
 export default observer(App)
