@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import NavbarComponent from 'components/ui/Navbar'
+import Profile from 'pages/ProfilePage'
 
 const App: FC = () => {
-  return <NavbarComponent />
+  return <Profile />
 }
 
 export default observer(App)
