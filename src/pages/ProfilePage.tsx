@@ -1,4 +1,6 @@
 import AvatarNameComponent from 'components/profile/AvatarNameComponent'
+import MyBestGuessesComponent from 'components/profile/MyBestGuessesComponent'
+import MyUploadsComponent from 'components/profile/MyUploadsComponent'
 import Layout from 'components/ui/Layout'
 import { FC } from 'react'
 import { Container } from 'react-bootstrap'
@@ -9,8 +11,8 @@ const Profile: FC = () => {
     <Layout>
       <Container className={styles.profilePage}>
         <AvatarNameComponent firstName="John" lastName="Doe" />
-        <Container className={styles.myBestGuessesContainer}></Container>
-        <Container className={styles.myUploadsContainer}></Container>
+        <MyBestGuessesComponent />
+        <MyUploadsComponent />
       </Container>
     </Layout>
   )
