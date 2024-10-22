@@ -7,11 +7,12 @@ import { Container } from 'react-bootstrap'
 import styles from 'styles/scss/pages.module.scss'
 
 const Profile: FC = () => {
+  const guess = [258, 155, 157, 100]
   return (
     <Layout>
       <Container className={styles.profilePage}>
         <AvatarNameComponent firstName="John" lastName="Doe" />
-        <MyBestGuessesComponent />
+        <MyBestGuessesComponent guesses={guess} />
         <MyUploadsComponent />
       </Container>
     </Layout>

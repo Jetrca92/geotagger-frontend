@@ -1,30 +1,24 @@
 import { FC } from 'react'
 import { Card } from 'react-bootstrap'
 import styles from 'styles/scss/custom-bootstrap.module.scss'
-import lockedIcon from 'styles/icons/locked-icon.png'
 
 interface Props {
-  locked?: boolean
   guess?: number
   imageSrc: string
 }
 
-const LocationCard: FC<Props> = ({ locked = false, imageSrc }) => {
+const LocationCardSm: FC<Props> = ({ guess, imageSrc }) => {
   return (
     <Card className={styles.locationCard}>
       <Card.Img
         src={imageSrc}
         alt="card"
-        className={styles.locationCardImage}
+        className={styles.locationCardImageSm}
       />
-      {locked && (
+      {guess && (
         <Card.ImgOverlay>
           <div className={styles.gradientOverlay}>
-            <img
-              src={lockedIcon}
-              alt="Locked Icon"
-              className={styles.lockedIcon}
-            />
+            <div className={styles.guessText}>{`${guess} m`}</div>
           </div>
         </Card.ImgOverlay>
       )}
@@ -32,4 +26,4 @@ const LocationCard: FC<Props> = ({ locked = false, imageSrc }) => {
   )
 }
 
-export default LocationCard
+export default LocationCardSm
