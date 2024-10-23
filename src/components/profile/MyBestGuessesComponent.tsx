@@ -3,7 +3,7 @@ import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
 import cardImage from 'styles/images/landing-card1.png'
-import LocationCardSm from 'components/ui/card/LocationCardSm'
+import BestGuessCard from 'components/ui/card/BestGuessCard'
 
 interface Props {
   guesses?: number[]
@@ -42,7 +42,7 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
             lg={3}
             className={styles.myBestGuessesCol}
           >
-            <LocationCardSm guess={guess} imageSrc={cardImage} />
+            <BestGuessCard guess={guess} imageSrc={cardImage} />
           </Col>
         ))}
       </Row>

@@ -67,7 +67,7 @@
   }
 }
 
-.customEditButton {
+.customEditDeleteButton {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,7 +76,10 @@
   border-radius: 8px;
   padding: 8px 16px;
   border-radius: 8px;
+}
 
+.customEditButton {
+  @extend .customEditDeleteButton;
   background-color: #619b8a;
   border: 1px solid #619b8a;
 
@@ -101,6 +104,32 @@
   }
 }
 
+.customDeleteButton {
+  @extend .customEditDeleteButton;
+  background-color: #9b6161;
+  border: 1px solid #9b6161;
+
+  &:hover {
+    background-color: #b47a7a;
+    border: 1px solid #b47a7a;
+  }
+
+  &:disabled {
+    background-color: #d3b8b8;
+    border: 1px solid #d3b8b8;
+  }
+
+  &:active {
+    background-color: #7e4d4d !important;
+    border-color: #7e4d4d !important;
+  }
+
+  &:focus {
+    background-color: #7e4d4d !important;
+    border-color: #7e4d4d !important;
+  }
+}
+
 .customAddButton {
   @extend .customEditButton;
   height: 40px;
@@ -113,6 +142,11 @@
 .editIcon {
   width: 20px;
   height: 20px;
+}
+
+.deleteIcon {
+  height: 14px;
+  width: 14px;
 }
 
 .addIcon {
@@ -163,6 +197,18 @@
   font-size: 24px;
   font-weight: 700;
   line-height: 36px;
+}
+
+.locationCardImageSmEditButton {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+}
+
+.locationCardImageSmDeleteButton {
+  position: absolute;
+  top: 3%;
+  right: 3%;
 }
 
 .gradientOverlay {

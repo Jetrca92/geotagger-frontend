@@ -13,7 +13,7 @@ const Profile: FC = () => {
       <Container className={styles.profilePage}>
         <AvatarNameComponent firstName="John" lastName="Doe" />
         <MyBestGuessesComponent guesses={guess} />
-        <MyUploadsComponent />
+        <MyUploadsComponent uploads={guess} />
       </Container>
     </Layout>
   )

@@ -7,7 +7,7 @@ interface Props {
   imageSrc: string
 }
 
-const LocationCardSm: FC<Props> = ({ guess, imageSrc }) => {
+const BestGuessCard: FC<Props> = ({ guess, imageSrc }) => {
   return (
     <Card className={styles.locationCard}>
       <Card.Img
@@ -26,4 +26,4 @@ const LocationCardSm: FC<Props> = ({ guess, imageSrc }) => {
   )
 }
 
-export default LocationCardSm
+export default BestGuessCard

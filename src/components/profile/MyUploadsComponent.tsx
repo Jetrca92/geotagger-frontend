@@ -1,14 +1,16 @@
 import PrimaryButton from 'components/ui/button/PrimaryButton'
+import MyUploadCard from 'components/ui/card/MyUploadCard'
 import { FC } from 'react'
-import { Container } from 'react-bootstrap'
+import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
+import cardImage from 'styles/images/landing-card2.png'
 
 interface Props {
-  guesses?: []
+  uploads?: number[]
 }
 
-const MyUploadsComponent: FC<Props> = ({ guesses }) => {
-  if (guesses?.length === 0 || !guesses)
+const MyUploadsComponent: FC<Props> = ({ uploads }) => {
+  if (uploads?.length === 0 || !uploads)
     return (
       <Container className={styles.myBestGuessesContainer}>
         <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
@@ -28,7 +30,24 @@ const MyUploadsComponent: FC<Props> = ({ guesses }) => {
         </div>
       </Container>
     )
-  return <Container className={styles.myBestGuessesContainer}></Container>
+  return (
+    <Container className={styles.myBestGuessesContainer}>
+      <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
+      <Row className={styles.myBestGuessesRow}>
+        {uploads.map((upload, index) => (
+          <Col
+            key={index}
+            sm={12}
+            md={6}
+            lg={3}
+            className={styles.myBestGuessesCol}
+          >
+            <MyUploadCard imageSrc={cardImage} />
+          </Col>
+        ))}
+      </Row>
+    </Container>
+  )
 }
 
 export default MyUploadsComponent
