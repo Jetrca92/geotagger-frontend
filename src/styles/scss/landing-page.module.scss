@@ -97,3 +97,56 @@
   align-items: center;
   margin-bottom: 167px;
 }
+
+.personalBestGuessesContainer {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.personalBestGuessesTitleCard {
+  @extend .personalBestGuessesContainer;
+  margin-bottom: 0px !important;
+}
+
+.personalBestGuessesTitleDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.personalBestGuessesTitle {
+  padding: 0px;
+  margin: 0px;
+  color: #619b8a;
+  font-weight: 400;
+  line-height: 39.84px;
+  letter-spacing: 0.25px;
+}
+
+.personalBestGuessesSubtitle {
+  color: #233d4d;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
+
+.bestGuessesContainer {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.personalBestGuessesRow {
+  row-gap: 19px;
+  column-gap: 19px;
+  margin: 0px;
+}
+
+.personalBestGuessesCol {
+  padding: 0px;
+  max-width: 420px;
+}

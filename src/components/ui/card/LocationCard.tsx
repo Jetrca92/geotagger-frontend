@@ -9,7 +9,7 @@ interface Props {
   imageSrc: string
 }
 
-const LocationCard: FC<Props> = ({ locked = false, imageSrc }) => {
+const LocationCard: FC<Props> = ({ locked = false, guess, imageSrc }) => {
   return (
     <Card className={styles.locationCard}>
       <Card.Img
@@ -25,6 +25,13 @@ const LocationCard: FC<Props> = ({ locked = false, imageSrc }) => {
               alt="Locked Icon"
               className={styles.lockedIcon}
             />
+          </div>
+        </Card.ImgOverlay>
+      )}
+      {guess && (
+        <Card.ImgOverlay>
+          <div className={styles.gradientOverlay}>
+            <div className={styles.guessText}>{`${guess} m`}</div>
           </div>
         </Card.ImgOverlay>
       )}
