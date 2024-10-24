@@ -1,0 +1,72 @@
+.activitiesTableContainer {
+  padding: 0px;
+}
+
+.activitiesTable {
+  margin-bottom: 128px;
+}
+
+.activitiesTableHead {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #667085 !important;
+}
+
+.userTableHead {
+  @extend .activitiesTableHead;
+  width: 285px;
+}
+
+.middleTableHead {
+  @extend .activitiesTableHead;
+  width: 176px;
+}
+
+.locationTableHead {
+  @extend .activitiesTableHead;
+  width: 311px;
+}
+
+.fullTableWidth {
+  width: 100%;
+}
+
+.emptyActivitiesDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.searchIconDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchIconImg {
+  width: 16px;
+  height: 16px;
+}
+
+.emptyActivitiesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyActivitiesTitle {
+  margin: 0px;
+  color: #101828;
+  font-weight: 400;
+  line-height: 28.13px;
+  text-align: center;
+}
+
+.emptyActivitiesText {
+  color: #667085;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  text-align: center;
+}

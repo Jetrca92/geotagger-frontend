@@ -1,11 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import Profile from 'pages/ProfilePage'
-import LandingPage from 'pages/LandingPage'
+import ActivityLog from 'pages/ActivityLogPage'
 
 const App: FC = () => {
-  return <LandingPage />
+  return <ActivityLog />
 }
 
 export default observer(App)
