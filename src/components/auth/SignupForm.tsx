@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import styles from 'styles/scss/auth.module.scss'
 import eyeIcon from 'styles/icons/eye.png'
-import EmptyAvatar from 'components/ui/icons/EmptyAvatar'
+import UserAvatar from 'components/ui/icons/UserAvatar'
 
 const SignupForm: FC = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -22,7 +22,7 @@ const SignupForm: FC = () => {
       </div>
       <Form>
         <Form.Group className={styles.formGroupCentered}>
-          <EmptyAvatar />
+          <UserAvatar />
         </Form.Group>
 
         <Form.Group className={styles.formGroup}>

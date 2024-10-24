@@ -6,7 +6,7 @@ interface Props {
   avatarSrc?: string
 }
 
-const EmptyAvatar: FC<Props> = ({ avatarSrc }) => {
+const UserAvatar: FC<Props> = ({ avatarSrc }) => {
   if (avatarSrc)
     return (
       <div className={styles.userAvatar}>
@@ -21,4 +21,4 @@ const EmptyAvatar: FC<Props> = ({ avatarSrc }) => {
   )
 }
 
-export default EmptyAvatar
+export default UserAvatar

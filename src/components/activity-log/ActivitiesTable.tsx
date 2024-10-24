@@ -2,6 +2,8 @@ import { FC } from 'react'
 import { Container, Table } from 'react-bootstrap'
 import styles from 'styles/scss/activity-log.module.scss'
 import searchIcon from 'styles/icons/search-icon.png'
+import UserAvatar from 'components/ui/icons/UserAvatar'
+import sampleAvatar from 'styles/images/sample-avatar.png'
 
 interface Props {
   activities?: number[]
@@ -54,19 +56,83 @@ const ActivitiesTable: FC<Props> = ({ activities }) => {
         </div>
       </Container>
     )
+
   return (
     <Container className={styles.activitiesTableContainer}>
-      <Table striped>
+      <Table striped className={styles.activitiesTable}>
         <thead>
           <tr>
-            <th>User</th>
-            <th>Date/Time</th>
-            <th>Action</th>
-            <th>Component type</th>
-            <th>New value</th>
-            <th>Location of action</th>
+            <th className={styles.userTableHead}>
+              <div className={styles.fullTableWidth}>User</div>
+            </th>
+            <th className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Date/Time</div>
+            </th>
+            <th className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Action</div>
+            </th>
+            <th className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Component type</div>
+            </th>
+            <th className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>New value</div>
+            </th>
+            <th className={styles.locationTableHead}>
+              <div className={styles.fullTableWidth}>Location of action</div>
+            </th>
           </tr>
         </thead>
+        <tbody>
+          {/* Mock row 1 */}
+          <tr className={styles.locationTableBodyRow}>
+            <td className={styles.userTableBody}>
+              <div className={styles.userTableBodyFlex}>
+                <UserAvatar avatarSrc={sampleAvatar} />
+                <div className={styles.fullTableWidthCenter}>John Doe</div>
+              </div>
+            </td>
+            <td className={styles.middleTableBody}>
+              <div className={styles.fullTableWidthDate}>
+                <div>2024-10-20</div>
+                <div>14:35:22</div>
+              </div>
+            </td>
+            <td className={styles.middleTableBody}>
+              <div className={styles.fullTableWidth}>Created</div>
+            </td>
+            <td className={styles.middleTableBody}>
+              <div className={styles.fullTableWidth}>Button</div>
+            </td>
+            <td className={styles.middleTableBody}>
+              <div className={styles.fullTableWidth}>Submit</div>
+            </td>
+            <td className={styles.locationTableBody}>
+              <div className={styles.fullTableWidth}>/dashboard</div>
+            </td>
+          </tr>
+
+          {/* Mock row 2 */}
+          <tr>
+            <td className={styles.userTableHead}>
+              <div className={styles.fullTableWidth}>Jane Smith</div>
+            </td>
+            <td className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>2024-10-20 15:20</div>
+            </td>
+            <td className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Updated</div>
+            </td>
+            <td className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Text Field</div>
+            </td>
+            <td className={styles.middleTableHead}>
+              <div className={styles.fullTableWidth}>Hello World</div>
+            </td>
+            <td className={styles.locationTableHead}>
+              <div className={styles.fullTableWidth}>/profile</div>
+            </td>
+          </tr>
+        </tbody>
       </Table>
     </Container>
   )

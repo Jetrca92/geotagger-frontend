@@ -28,8 +28,50 @@
   width: 311px;
 }
 
+.userTableBody {
+  @extend .userTableHead;
+  font-weight: 600;
+  font-size: 14px;
+  color: #101828 !important;
+  vertical-align: middle;
+}
+
+.userTableBodyFlex {
+  display: flex;
+  gap: 12px;
+}
+
+.middleTableBody {
+  @extend .middleTableHead;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.locationTableBody {
+  @extend .locationTableHead;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.locationTableBodyRow {
+  height: 70px;
+}
+
 .fullTableWidth {
   width: 100%;
+}
+
+.fullTableWidthCenter {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.fullTableWidthDate {
+  @extend .fullTableWidth;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .emptyActivitiesDiv {
