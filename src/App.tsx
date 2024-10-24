@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import ActivityLog from 'pages/ActivityLogPage'
+import LocationPage from 'pages/LocationGuess'
 
 const App: FC = () => {
-  return <ActivityLog />
+  return <LocationPage />
 }
 
 export default observer(App)

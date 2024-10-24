@@ -110,28 +110,6 @@ const ActivitiesTable: FC<Props> = ({ activities }) => {
               <div className={styles.fullTableWidth}>/dashboard</div>
             </td>
           </tr>
-
-          {/* Mock row 2 */}
-          <tr>
-            <td className={styles.userTableHead}>
-              <div className={styles.fullTableWidth}>Jane Smith</div>
-            </td>
-            <td className={styles.middleTableHead}>
-              <div className={styles.fullTableWidth}>2024-10-20 15:20</div>
-            </td>
-            <td className={styles.middleTableHead}>
-              <div className={styles.fullTableWidth}>Updated</div>
-            </td>
-            <td className={styles.middleTableHead}>
-              <div className={styles.fullTableWidth}>Text Field</div>
-            </td>
-            <td className={styles.middleTableHead}>
-              <div className={styles.fullTableWidth}>Hello World</div>
-            </td>
-            <td className={styles.locationTableHead}>
-              <div className={styles.fullTableWidth}>/profile</div>
-            </td>
-          </tr>
         </tbody>
       </Table>
     </Container>
