@@ -116,3 +116,100 @@
   flex-direction: column;
   gap: 16px;
 }
+
+.leaderboardList {
+  width: 420px;
+}
+
+.leaderboardListItem {
+  height: 48px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px;
+}
+
+.leaderboardUserDetailsDiv {
+  width: 199px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.leaderboardUserDetails {
+  display: flex;
+  gap: 16px;
+}
+
+.userNameSurnameDate {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: #233d4d;
+}
+
+.userNameSurname {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
+
+.userGuessDate {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  letter-spacing: 0.4px;
+}
+
+.userRankingIconDiv {
+  width: 27px;
+  height: 27px;
+  padding: 10px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.userRankingIconDivFirst {
+  @extend .userRankingIconDiv;
+  background: linear-gradient(41.75deg, #fe7f2d 22.78%, #fcca46 87.18%);
+}
+
+.userRankingIconDivSecond {
+  @extend .userRankingIconDiv;
+  background: linear-gradient(41.75deg, #d8d8d8 22.78%, #999999 87.18%);
+}
+
+.userRankingIconDivThird {
+  @extend .userRankingIconDiv;
+  background: linear-gradient(41.75deg, #956956 22.78%, #d79376 87.18%);
+}
+
+.userRankingIconDivNonPodium {
+  @extend .userRankingIconDiv;
+  background: #233d4d;
+}
+
+.userRankingIconNumber {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  letter-spacing: 0.4px;
+}
+
+.leaderboardUserAvatar {
+  width: 40px;
+  height: 40px;
+}
+
+.guessDistance {
+  text-align: end;
+  color: #619b8a;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}

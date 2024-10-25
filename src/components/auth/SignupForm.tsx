@@ -22,7 +22,9 @@ const SignupForm: FC = () => {
       </div>
       <Form>
         <Form.Group className={styles.formGroupCentered}>
-          <UserAvatar />
+          <div className={styles.emptyAvatar}>
+            <UserAvatar />
+          </div>
         </Form.Group>
 
         <Form.Group className={styles.formGroup}>

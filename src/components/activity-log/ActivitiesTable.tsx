@@ -87,7 +87,9 @@ const ActivitiesTable: FC<Props> = ({ activities }) => {
           <tr className={styles.locationTableBodyRow}>
             <td className={styles.userTableBody}>
               <div className={styles.userTableBodyFlex}>
-                <UserAvatar avatarSrc={sampleAvatar} />
+                <div className={styles.userAvatar}>
+                  <UserAvatar avatarSrc={sampleAvatar} />
+                </div>
                 <div className={styles.fullTableWidthCenter}>John Doe</div>
               </div>
             </td>
