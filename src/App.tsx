@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import LocationPage from 'pages/LocationGuess'
+import AddLocationPage from 'pages/AddLocationPage'
 
 const App: FC = () => {
-  return <LocationPage />
+  return <AddLocationPage />
 }
 
 export default observer(App)
