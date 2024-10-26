@@ -234,6 +234,10 @@
   object-fit: cover;
 }
 
+.imagePreviewDiv {
+  height: 280px;
+}
+
 input[type='file'] {
   display: none !important;
 }
@@ -261,4 +265,37 @@ input[type='file'] {
 
 .locationInput {
   height: 35px;
+}
+
+.locationAddressText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  color: #000000;
+}
+
+.editLocationFormActions {
+  display: flex;
+  justify-content: space-between;
+  height: 36px;
+}
+
+.actionsRight {
+  display: flex;
+  gap: 23px;
+}
+
+.link {
+  font-size: 16px;
+  line-height: 18.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #233d4d;
+  text-decoration: none;
+}
+
+.signInLink {
+  @extend .link;
+  font-weight: 600;
 }

@@ -11,15 +11,17 @@ const AddLocationForm: FC = () => {
   return (
     <Container className={styles.addLocationFormContainer}>
       <Form className={styles.addLocationForm}>
-        {preview ? (
-          <img src={preview} alt="Preview" className={styles.imagePreview} />
-        ) : (
-          <img
-            src={noLocation}
-            alt="Location"
-            className={styles.imagePreview}
-          />
-        )}
+        <div className={styles.imagePreviewDiv}>
+          {preview ? (
+            <img src={preview} alt="Preview" className={styles.imagePreview} />
+          ) : (
+            <img
+              src={noLocation}
+              alt="Location"
+              className={styles.imagePreview}
+            />
+          )}
+        </div>
         <Form.Group>
           <Form.Label className={styles.uploadImageButtonDiv}>
             <SecondaryButton text="Upload image" />

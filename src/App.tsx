@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
 
-import AddLocationPage from 'pages/AddLocationPage'
+import EditLocationPage from 'pages/EditLocationPage'
 
 const App: FC = () => {
-  return <AddLocationPage />
+  return <EditLocationPage />
 }
 
 export default observer(App)
