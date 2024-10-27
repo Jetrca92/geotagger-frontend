@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import logoNavbar from 'styles/images/logo-navbar.png'
@@ -6,9 +6,15 @@ import styles from 'styles/scss/navbar.module.scss'
 import PrimaryButton from './button/PrimaryButton'
 import UserProfileButton from './button/UserProfileButton'
 import AddButton from './button/AddButton'
+import ProfileSettingsModal from 'components/modals/ProfileSettingsModal'
 
 const NavbarComponent: FC = () => {
   const user = true
+  const [showProfileSettings, setShowProfileSettings] = useState(false)
+
+  const handleCloseProfileSettings = () => setShowProfileSettings(false)
+  const handleShowProfileSettings = () => setShowProfileSettings(true)
+
   return (
     <Container className={styles.navbarContainer}>
       <Navbar expand="lg" className={styles.customNavbar}>
@@ -29,9 +35,12 @@ const NavbarComponent: FC = () => {
                 <Link to="/" className={styles.link}>
                   Home
                 </Link>
-                <Link to="/" className={styles.link}>
+                <div
+                  className={styles.link}
+                  onClick={handleShowProfileSettings}
+                >
                   Profile settings
-                </Link>
+                </div>
                 <Link to="/" className={styles.link}>
                   Logout
                 </Link>
@@ -63,6 +72,10 @@ const NavbarComponent: FC = () => {
           </>
         )}
       </Navbar>
+      <ProfileSettingsModal
+        show={showProfileSettings}
+        onHide={handleCloseProfileSettings}
+      />
     </Container>
   )
 }
