@@ -3,7 +3,6 @@ import { Route, RouteProps, Routes as Switch } from 'react-router-dom'
 import PrivateRoute from './PrivateRoute'
 import RestrictedRoute from './RestrictedRoute'
 import { routes } from 'constants/routesConstants'
-import ForgotPasswordPage from 'pages/ForgotPasswordPage'
 
 export enum RouteType {
   PUBLIC,
@@ -32,12 +31,12 @@ const Page404 = lazy(() => import('pages/Page404'))
 export const AppRoutes: AppRoute[] = [
   // Restricted Routes
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.RESTRICTED,
     path: routes.LOGIN,
     children: <Login />,
   },
   {
-    type: RouteType.PUBLIC,
+    type: RouteType.RESTRICTED,
     path: routes.SIGNUP,
     children: <Register />,
   },

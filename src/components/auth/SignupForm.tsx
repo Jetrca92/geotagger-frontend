@@ -1,10 +1,49 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import styles from 'styles/scss/auth.module.scss'
 import eyeIcon from 'styles/icons/eye.png'
 import UserAvatar from 'components/ui/icons/UserAvatar'
+import { errorStore } from 'stores/error.store'
+import { useNavigate } from 'react-router-dom'
+import {
+  RegisterUserFields,
+  useRegisterForm,
+} from 'hooks/react-hook-form/useRegister'
+import * as API from 'api/Api'
+import { StatusCode } from 'constants/errorConstants'
+import authStore from 'stores/auth.store'
 
 const SignupForm: FC = () => {
+  useEffect(() => {
+    errorStore.clearError()
+  }, [])
+
+  const navigate = useNavigate()
+  const { handleSubmit, errors, control } = useRegisterForm()
+
+  const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
+    const response = await API.signup(data)
+    if (response.data?.statusCode) {
+      errorStore.setError(response.data.message)
+    } else {
+      // Login user
+      const loginResponse = await API.login({
+        email: data.email,
+        password: data.password,
+      })
+      if (loginResponse.data?.statusCode) {
+        errorStore.setError(loginResponse.data.message)
+      } else {
+        try {
+          const user = await API.fetchUser(response)
+          authStore.login(user, response)
+          navigate('/')
+        } catch (error) {
+          errorStore.setError('Failed to fetch user information')
+        }
+      }
+    }
+  })
   const [showPassword, setShowPassword] = useState(false)
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 

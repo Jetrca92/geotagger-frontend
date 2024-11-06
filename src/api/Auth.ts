@@ -4,7 +4,7 @@ import { LoginUserFields } from 'hooks/react-hook-form/useLogin'
 import { UserType } from 'models/auth'
 import { RegisterUserFields } from 'hooks/react-hook-form/useRegister'
 import { AxiosHeaders, AxiosRequestHeaders } from 'axios'
-import { ChangePasswordFormFields } from 'hooks/react-hook-form/useChangePasswordForm'
+import { ChangePasswordFormFields } from 'hooks/react-hook-form/useChangePassword'
 
 export const login = async (data: LoginUserFields) =>
   apiRequest<LoginUserFields, void>('post', apiRoutes.LOGIN, data)

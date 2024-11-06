@@ -1,10 +1,9 @@
 import { FC } from 'react'
 import { observer } from 'mobx-react'
-
-import LandingPage from 'pages/LandingPage'
+import Routes from 'routes/Routes'
 
 const App: FC = () => {
-  return <LandingPage />
+  return <Routes />
 }
 
 export default observer(App)

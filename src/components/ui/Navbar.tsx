@@ -7,9 +7,11 @@ import PrimaryButton from './button/PrimaryButton'
 import UserProfileButton from './button/UserProfileButton'
 import AddButton from './button/AddButton'
 import ProfileSettingsModal from 'components/modals/ProfileSettingsModal'
+import { userStorage } from 'utils/localStorage'
+import { routes } from 'constants/routesConstants'
 
 const NavbarComponent: FC = () => {
-  const user = true
+  const user = userStorage.getUser()
   const [showProfileSettings, setShowProfileSettings] = useState(false)
 
   const handleCloseProfileSettings = () => setShowProfileSettings(false)
@@ -18,9 +20,11 @@ const NavbarComponent: FC = () => {
   return (
     <Container className={styles.navbarContainer}>
       <Navbar expand="lg" className={styles.customNavbar}>
-        <Navbar.Brand className={styles.customContainers}>
-          <img src={logoNavbar} className={styles.logoImage} alt="logo" />
-        </Navbar.Brand>
+        <Link to={routes.HOME}>
+          <Navbar.Brand className={styles.customContainers}>
+            <img src={logoNavbar} className={styles.logoImage} alt="logo" />
+          </Navbar.Brand>
+        </Link>
         {user ? (
           <>
             <Navbar.Toggle
@@ -62,11 +66,13 @@ const NavbarComponent: FC = () => {
               className="justify-content-end"
             >
               <Nav className={styles.navbarButtonsContainer}>
-                <Link to="/" className={styles.signInLink}>
+                <Link to={routes.LOGIN} className={styles.signInLink}>
                   Sign in
                 </Link>
                 <div className={styles.orText}>or</div>
-                <PrimaryButton text="Sign up" />
+                <Link to={routes.SIGNUP}>
+                  <PrimaryButton text="Sign up" />
+                </Link>
               </Nav>
             </Navbar.Collapse>
           </>

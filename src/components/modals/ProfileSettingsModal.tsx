@@ -1,5 +1,4 @@
 import CancelButton from 'components/ui/button/CancelButton'
-import PrimaryButton from 'components/ui/button/PrimaryButton'
 import { FC } from 'react'
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
 import styles from 'styles/scss/custom-bootstrap.module.scss'
