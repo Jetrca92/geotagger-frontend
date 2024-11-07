@@ -25,12 +25,10 @@ const LoginForm: FC = () => {
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
     if (response.data?.statusCode) {
-      console.log(response.data)
       dispatch(setError(response.data.message))
       return
     }
     try {
-      console.log(response.data)
       const user = await API.fetchUser(response.data.access_token)
       dispatch(login({ user, token: response.data.access_token }))
       navigate('/')

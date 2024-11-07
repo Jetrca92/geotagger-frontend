@@ -4,15 +4,18 @@ import styles from 'styles/scss/auth.module.scss'
 import eyeIcon from 'styles/icons/eye.png'
 import UserAvatar from 'components/ui/icons/UserAvatar'
 
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   RegisterUserFields,
   useRegisterForm,
 } from 'hooks/react-hook-form/useRegister'
 import * as API from 'api/Api'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from 'stores/authSlice'
 import { clearError, setError } from 'stores/errorSlice'
+import { routes } from 'constants/routesConstants'
+import { Controller } from 'react-hook-form'
+import { RootState } from 'stores/store'
 
 const SignupForm: FC = () => {
   const dispatch = useDispatch()
@@ -20,11 +23,13 @@ const SignupForm: FC = () => {
     dispatch(clearError())
   }, [dispatch])
 
+  const { apiError, showError } = useSelector((state: RootState) => state.error)
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useRegisterForm()
 
   const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
-    const response = await API.signup(data)
+    const { confirmPassword, ...submitData } = data
+    const response = await API.signup(submitData)
     if (response.data?.statusCode) {
       dispatch(setError(response.data.message))
     } else {
@@ -37,8 +42,8 @@ const SignupForm: FC = () => {
         dispatch(setError(loginResponse.data.message))
       } else {
         try {
-          const user = await API.fetchUser(response)
-          dispatch(login({ user, token: response }))
+          const user = await API.fetchUser(loginResponse)
+          dispatch(login({ user, token: loginResponse.data.access_token }))
           navigate('/')
         } catch (error) {
           dispatch(setError('Failed to fetch user information'))
@@ -61,7 +66,7 @@ const SignupForm: FC = () => {
           Your name will appear on posts and your public profle.
         </div>
       </div>
-      <Form>
+      <Form onSubmit={onSubmit}>
         <Form.Group className={styles.formGroupCentered}>
           <div className={styles.emptyAvatar}>
             <UserAvatar />
@@ -70,33 +75,72 @@ const SignupForm: FC = () => {
 
         <Form.Group className={styles.formGroup}>
           <Form.Label className={styles.labelText}>Email</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="hey@geotagger.com"
-            className={styles.formControl}
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Form.Control
+                {...field}
+                type="email"
+                placeholder="hey@geotagger.com"
+                className={styles.formControl}
+                isInvalid={!!errors.email}
+              />
+            )}
           />
+          {errors.email && (
+            <Form.Text className={styles.formErrorText}>
+              {errors.email.message}
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Row className={styles.signupRow}>
           <Col className={styles.signupCol}>
             <Form.Group className={styles.formGroup}>
               <Form.Label className={styles.labelText}>First name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="John"
-                className={styles.formControl}
+              <Controller
+                name="firstName"
+                control={control}
+                render={({ field }) => (
+                  <Form.Control
+                    {...field}
+                    type="text"
+                    placeholder="John"
+                    className={styles.formControl}
+                    isInvalid={!!errors.firstName}
+                  />
+                )}
               />
+              {errors.firstName && (
+                <Form.Text className={styles.formErrorText}>
+                  {errors.firstName.message}
+                </Form.Text>
+              )}
             </Form.Group>
           </Col>
 
           <Col className={styles.signupCol}>
             <Form.Group className={styles.formGroup}>
               <Form.Label className={styles.labelText}>Last name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Doe"
-                className={styles.formControl}
+              <Controller
+                name="lastName"
+                control={control}
+                render={({ field }) => (
+                  <Form.Control
+                    {...field}
+                    type="text"
+                    placeholder="Doe"
+                    className={styles.formControl}
+                    isInvalid={!!errors.lastName}
+                  />
+                )}
               />
+              {errors.lastName && (
+                <Form.Text className={styles.formErrorText}>
+                  {errors.lastName.message}
+                </Form.Text>
+              )}
             </Form.Group>
           </Col>
         </Row>
@@ -104,22 +148,43 @@ const SignupForm: FC = () => {
         <Form.Group className={styles.formGroup}>
           <Form.Label className={styles.labelText}>Password</Form.Label>
           <div className={styles.inputWithIcon}>
-            <Form.Control
-              type={showPassword ? 'text' : 'password'}
-              className={styles.formControl}
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type={showPassword ? 'text' : 'password'}
+                  className={styles.formControl}
+                  isInvalid={!!errors.password}
+                />
+              )}
             />
             <span onClick={togglePasswordVisibility} className={styles.eyeIcon}>
               <img src={eyeIcon} alt="eye" className={styles.eyeIcon} />
             </span>
           </div>
+          {errors.password && (
+            <Form.Text className={styles.formErrorText}>
+              {errors.password.message}
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Form.Group className={styles.formGroup}>
           <Form.Label className={styles.labelText}>Repeat password</Form.Label>
           <div className={styles.inputWithIcon}>
-            <Form.Control
-              type={showRepeatPassword ? 'text' : 'password'}
-              className={styles.formControl}
+            <Controller
+              name="confirmPassword"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type={showRepeatPassword ? 'text' : 'password'}
+                  className={styles.formControl}
+                  isInvalid={!!errors.password}
+                />
+              )}
             />
             <span
               onClick={toggleRepeatPasswordVisibility}
@@ -128,16 +193,26 @@ const SignupForm: FC = () => {
               <img src={eyeIcon} alt="eye" className={styles.eyeIcon} />
             </span>
           </div>
+          {errors.confirmPassword && (
+            <Form.Text className={styles.formErrorText}>
+              {errors.confirmPassword.message}
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Button className={styles.formButton} type="submit">
           Sign up
         </Button>
+        {showError && (
+          <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
+        )}
         <div className={styles.createAccountText}>
           <div className={styles.createAccountTextLeft}>
             Already have an account?
           </div>
-          <div className={styles.createAccountTextRight}>Sign in</div>
+          <Link to={routes.LOGIN} className={styles.createAccountTextRight}>
+            Sign in
+          </Link>
         </div>
       </Form>
     </Container>

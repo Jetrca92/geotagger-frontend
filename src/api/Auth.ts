@@ -2,15 +2,15 @@ import { apiRoutes } from 'constants/apiConstants'
 import { apiRequest } from './Api'
 import { LoginUserFields } from 'hooks/react-hook-form/useLogin'
 import { UserType } from 'models/auth'
-import { RegisterUserFields } from 'hooks/react-hook-form/useRegister'
+import { ApiRegisterUser } from 'hooks/react-hook-form/useRegister'
 import { AxiosHeaders, AxiosRequestHeaders } from 'axios'
 import { ChangePasswordFormFields } from 'hooks/react-hook-form/useChangePassword'
 
 export const login = async (data: LoginUserFields) =>
   apiRequest<LoginUserFields, void>('post', apiRoutes.LOGIN, data)
 
-export const signup = async (data: RegisterUserFields) =>
-  apiRequest<RegisterUserFields, void>('post', apiRoutes.SIGNUP, data)
+export const signup = async (data: ApiRegisterUser) =>
+  apiRequest<ApiRegisterUser, void>('post', apiRoutes.SIGNUP, data)
 
 export const fetchUser = async (token: string) => {
   const headers: AxiosRequestHeaders = AxiosHeaders.from({
