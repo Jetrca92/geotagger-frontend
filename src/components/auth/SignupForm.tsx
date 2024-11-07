@@ -42,7 +42,7 @@ const SignupForm: FC = () => {
         dispatch(setError(loginResponse.data.message))
       } else {
         try {
-          const user = await API.fetchUser(loginResponse)
+          const user = await API.fetchUser(loginResponse.data.access_token)
           dispatch(login({ user, token: loginResponse.data.access_token }))
           navigate('/')
         } catch (error) {
