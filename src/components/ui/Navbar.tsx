@@ -7,15 +7,21 @@ import PrimaryButton from './button/PrimaryButton'
 import UserProfileButton from './button/UserProfileButton'
 import AddButton from './button/AddButton'
 import ProfileSettingsModal from 'components/modals/ProfileSettingsModal'
-import { userStorage } from 'utils/localStorage'
 import { routes } from 'constants/routesConstants'
+import { useDispatch, useSelector } from 'react-redux'
+import { selectUser, signout } from 'stores/authSlice'
 
 const NavbarComponent: FC = () => {
-  const user = userStorage.getUser()
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
 
   const handleCloseProfileSettings = () => setShowProfileSettings(false)
   const handleShowProfileSettings = () => setShowProfileSettings(true)
+
+  const logout = () => {
+    dispatch(signout())
+  }
 
   return (
     <Container className={styles.navbarContainer}>
@@ -45,7 +51,7 @@ const NavbarComponent: FC = () => {
                 >
                   Profile settings
                 </div>
-                <Link to="/" className={styles.link}>
+                <Link to="/" className={styles.link} onClick={logout}>
                   Logout
                 </Link>
                 <div className={styles.navbarUserButtonsContainer}>

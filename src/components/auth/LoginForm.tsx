@@ -3,30 +3,39 @@ import { FC, useEffect } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import styles from 'styles/scss/auth.module.scss'
 import * as API from 'api/Api'
-import { errorStore } from 'stores/error.store'
-import authStore from 'stores/auth.store'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { Controller } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from 'stores/authSlice'
+import { clearError, setError } from 'stores/errorSlice'
+import { RootState } from 'stores/store'
+import { routes } from 'constants/routesConstants'
 
 const LoginForm: FC = () => {
-  const navigate = useNavigate()
-  const { handleSubmit, errors, control } = useLoginForm()
-
+  const dispatch = useDispatch()
   useEffect(() => {
-    errorStore.clearError()
-  }, [])
+    dispatch(clearError())
+  }, [dispatch])
+
+  const { apiError, showError } = useSelector((state: RootState) => state.error)
+  const navigate = useNavigate()
+
+  const { handleSubmit, errors, control } = useLoginForm()
 
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
     if (response.data?.statusCode) {
-      errorStore.setError(response.data.message)
+      console.log(response.data)
+      dispatch(setError(response.data.message))
       return
     }
     try {
+      console.log(response.data)
       const user = await API.fetchUser(response.data.access_token)
-      authStore.login(user, response.data)
+      dispatch(login({ user, token: response.data.access_token }))
       navigate('/')
     } catch (error) {
-      errorStore.setError('Failed to fetch user information')
+      dispatch(setError('Failed to fetch user information'))
     }
   })
 
@@ -40,22 +49,59 @@ const LoginForm: FC = () => {
         <Form onSubmit={onSubmit}>
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.labelText}>Email</Form.Label>
-            <Form.Control type="email" className={styles.formControl} />
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type="email"
+                  className={styles.formControl}
+                  isInvalid={!!errors.email}
+                />
+              )}
+            />
+            {errors.email && (
+              <Form.Text className={styles.formErrorText}>
+                {errors.email.message}
+              </Form.Text>
+            )}
           </Form.Group>
 
           <Form.Group className={styles.formGroup}>
             <Form.Label className={styles.labelText}>Password</Form.Label>
-            <Form.Control type="password" className={styles.formControl} />
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <Form.Control
+                  {...field}
+                  type="password"
+                  className={styles.formControl}
+                  isInvalid={!!errors.password}
+                />
+              )}
+            />
+            {errors.password && (
+              <Form.Text className={styles.formErrorText}>
+                {errors.password.message}
+              </Form.Text>
+            )}
           </Form.Group>
 
           <Button className={styles.formButton} type="submit">
             Sign in
           </Button>
+          {showError && (
+            <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
+          )}
           <div className={styles.createAccountText}>
             <div className={styles.createAccountTextLeft}>
               Do you want to create an account?
             </div>
-            <div className={styles.createAccountTextRight}>Sign up</div>
+            <Link to={routes.SIGNUP} className={styles.createAccountTextRight}>
+              Sign up
+            </Link>
           </div>
         </Form>
       </div>

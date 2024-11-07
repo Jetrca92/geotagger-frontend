@@ -3,20 +3,22 @@ import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import styles from 'styles/scss/auth.module.scss'
 import eyeIcon from 'styles/icons/eye.png'
 import UserAvatar from 'components/ui/icons/UserAvatar'
-import { errorStore } from 'stores/error.store'
+
 import { useNavigate } from 'react-router-dom'
 import {
   RegisterUserFields,
   useRegisterForm,
 } from 'hooks/react-hook-form/useRegister'
 import * as API from 'api/Api'
-import { StatusCode } from 'constants/errorConstants'
-import authStore from 'stores/auth.store'
+import { useDispatch } from 'react-redux'
+import { login } from 'stores/authSlice'
+import { clearError, setError } from 'stores/errorSlice'
 
 const SignupForm: FC = () => {
+  const dispatch = useDispatch()
   useEffect(() => {
-    errorStore.clearError()
-  }, [])
+    dispatch(clearError())
+  }, [dispatch])
 
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useRegisterForm()
@@ -24,7 +26,7 @@ const SignupForm: FC = () => {
   const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
     const response = await API.signup(data)
     if (response.data?.statusCode) {
-      errorStore.setError(response.data.message)
+      dispatch(setError(response.data.message))
     } else {
       // Login user
       const loginResponse = await API.login({
@@ -32,14 +34,14 @@ const SignupForm: FC = () => {
         password: data.password,
       })
       if (loginResponse.data?.statusCode) {
-        errorStore.setError(loginResponse.data.message)
+        dispatch(setError(loginResponse.data.message))
       } else {
         try {
           const user = await API.fetchUser(response)
-          authStore.login(user, response)
+          dispatch(login({ user, token: response }))
           navigate('/')
         } catch (error) {
-          errorStore.setError('Failed to fetch user information')
+          dispatch(setError('Failed to fetch user information'))
         }
       }
     }

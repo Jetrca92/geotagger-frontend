@@ -1,12 +1,13 @@
-import authStore from 'stores/auth.store'
-import { observer } from 'mobx-react'
 import { FC } from 'react'
 import { Navigate, RouteProps, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectUser } from 'stores/authSlice'
 
 const PrivateRoute: FC<RouteProps> = ({ children }: RouteProps) => {
   const location = useLocation()
+  const user = useSelector(selectUser)
 
-  if (!authStore.user) {
+  if (!user) {
     return (
       <Navigate
         to={`/login?redirect=${encodeURIComponent(location.pathname)}`}
@@ -17,4 +18,4 @@ const PrivateRoute: FC<RouteProps> = ({ children }: RouteProps) => {
   return children as JSX.Element
 }
 
-export default observer(PrivateRoute)
+export default PrivateRoute

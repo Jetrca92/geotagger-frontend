@@ -1,17 +1,18 @@
-import authStore from 'stores/auth.store'
-import { observer } from 'mobx-react'
 import { FC, ReactNode } from 'react'
+import { useSelector } from 'react-redux'
 import { Navigate } from 'react-router-dom'
+import { selectUser } from 'stores/authSlice'
 
 interface RestrictedRouteProps {
   children: ReactNode
 }
 
 const RestrictedRoute: FC<RestrictedRouteProps> = ({ children }) => {
-  if (authStore.user) {
+  const user = useSelector(selectUser)
+  if (user) {
     return <Navigate to="/" />
   }
   return children ? (children as JSX.Element) : null
 }
 
-export default observer(RestrictedRoute)
+export default RestrictedRoute
