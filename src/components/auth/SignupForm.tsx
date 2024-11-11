@@ -17,93 +17,24 @@ import { routes } from 'constants/routesConstants'
 import { Controller } from 'react-hook-form'
 import { RootState } from 'stores/store'
 import { ErrorType } from 'constants/errorConstants'
-import { isValidFile } from 'utils/fileUtils'
+import { isValidFile, uploadUserAvatar } from 'utils/fileUtils'
 
 const SignupForm: FC = () => {
   const dispatch = useDispatch()
-  useEffect(() => {
-    dispatch(clearAllErrors())
-  }, [dispatch])
-
+  const navigate = useNavigate()
+  const { handleSubmit, errors, control } = useRegisterForm()
   const { apiError, fileError, showApiError, showFileError } = useSelector(
     (state: RootState) => state.error,
   )
-  const navigate = useNavigate()
-  const { handleSubmit, errors, control } = useRegisterForm()
+
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 
-  const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
-    if (!file) {
-      dispatch(
-        setError({ type: ErrorType.FILE, message: 'Please upload an avatar' }),
-      )
-      return
-    }
-    const { confirmPassword, ...submitData } = data
-    const response = await API.signup(submitData)
-    if (response.data?.statusCode) {
-      dispatch(
-        setError({ type: ErrorType.API, message: response.data.message }),
-      )
-    } else {
-      // Login user
-      const loginResponse = await API.login({
-        email: data.email,
-        password: data.password,
-      })
-      if (loginResponse.data?.statusCode) {
-        dispatch(
-          setError({
-            type: ErrorType.API,
-            message: loginResponse.data.message,
-          }),
-        )
-      } else {
-        // upload image
-        try {
-          const formData = new FormData()
-          formData.append('image', file as File, file?.name)
-
-          const imageResponse = await API.uploadImage(
-            loginResponse.data.access_token,
-            formData,
-            response.data.id,
-          )
-          if (imageResponse.data?.statusCode) {
-            dispatch(
-              setError({
-                type: ErrorType.FILE,
-                message: imageResponse.data.message,
-              }),
-            )
-            return
-          }
-        } catch (error) {
-          console.log(error)
-          dispatch(
-            setError({
-              type: ErrorType.FILE,
-              message: 'Failed to upload a file.',
-            }),
-          )
-          return
-        }
-        try {
-          const user = await API.fetchUser(loginResponse.data.access_token)
-          dispatch(login({ user, token: loginResponse.data.access_token }))
-          navigate('/')
-        } catch (error) {
-          dispatch(
-            setError({
-              type: ErrorType.API,
-              message: 'Failed to fetch user information.',
-            }),
-          )
-        }
-      }
-    }
-  })
+  useEffect(() => {
+    dispatch(clearAllErrors())
+  }, [dispatch])
 
   const handleFileChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
     if (target.files) {
@@ -123,12 +54,63 @@ const SignupForm: FC = () => {
     reader.readAsDataURL(file)
   }, [file])
 
-  const [showPassword, setShowPassword] = useState(false)
-  const [showRepeatPassword, setShowRepeatPassword] = useState(false)
-
   const togglePasswordVisibility = () => setShowPassword(!showPassword)
   const toggleRepeatPasswordVisibility = () =>
     setShowRepeatPassword(!showRepeatPassword)
+
+  const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
+    if (!file) {
+      dispatch(
+        setError({ type: ErrorType.FILE, message: 'Please upload an avatar' }),
+      )
+      return
+    }
+
+    const { confirmPassword, ...submitData } = data
+    try {
+      const response = await API.signup(submitData)
+
+      if (response.data?.statusCode) {
+        dispatch(
+          setError({ type: ErrorType.API, message: response.data.message }),
+        )
+        return
+      }
+
+      const loginResponse = await API.login({
+        email: data.email,
+        password: data.password,
+      })
+
+      if (loginResponse.data?.statusCode) {
+        dispatch(
+          setError({
+            type: ErrorType.API,
+            message: loginResponse.data.message,
+          }),
+        )
+        return
+      }
+
+      await uploadUserAvatar(
+        loginResponse.data.access_token,
+        response.data.id,
+        file,
+        dispatch,
+      )
+      const user = await API.fetchUser(loginResponse.data.access_token)
+
+      dispatch(login({ user, token: loginResponse.data.access_token }))
+      navigate('/')
+    } catch (error) {
+      dispatch(
+        setError({
+          type: ErrorType.API,
+          message: 'Failed to complete signup process.',
+        }),
+      )
+    }
+  })
 
   return (
     <Container className={styles.authFormContainer}>

@@ -28,7 +28,9 @@ const LoginForm: FC = () => {
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
     const response = await API.login(data)
     if (response.data?.statusCode) {
-      dispatch(setError(response.data.message))
+      dispatch(
+        setError({ type: ErrorType.API, message: response.data.message }),
+      )
       return
     }
     try {
@@ -52,65 +54,65 @@ const LoginForm: FC = () => {
         <div className={styles.authFormSubtitle}>
           Welcome back to Geotagger. We are glad that you are back.
         </div>
-        <Form onSubmit={onSubmit}>
-          <Form.Group className={styles.formGroup}>
-            <Form.Label className={styles.labelText}>Email</Form.Label>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <Form.Control
-                  {...field}
-                  type="email"
-                  className={styles.formControl}
-                  isInvalid={!!errors.email}
-                />
-              )}
-            />
-            {errors.email && (
-              <Form.Text className={styles.formErrorText}>
-                {errors.email.message}
-              </Form.Text>
-            )}
-          </Form.Group>
-
-          <Form.Group className={styles.formGroup}>
-            <Form.Label className={styles.labelText}>Password</Form.Label>
-            <Controller
-              name="password"
-              control={control}
-              render={({ field }) => (
-                <Form.Control
-                  {...field}
-                  type="password"
-                  className={styles.formControl}
-                  isInvalid={!!errors.password}
-                />
-              )}
-            />
-            {errors.password && (
-              <Form.Text className={styles.formErrorText}>
-                {errors.password.message}
-              </Form.Text>
-            )}
-          </Form.Group>
-
-          <Button className={styles.formButton} type="submit">
-            Sign in
-          </Button>
-          {showApiError && (
-            <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
-          )}
-          <div className={styles.createAccountText}>
-            <div className={styles.createAccountTextLeft}>
-              Do you want to create an account?
-            </div>
-            <Link to={routes.SIGNUP} className={styles.createAccountTextRight}>
-              Sign up
-            </Link>
-          </div>
-        </Form>
       </div>
+      <Form onSubmit={onSubmit}>
+        <Form.Group className={styles.formGroup}>
+          <Form.Label className={styles.labelText}>Email</Form.Label>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <Form.Control
+                {...field}
+                type="email"
+                className={styles.formControl}
+                isInvalid={!!errors.email}
+              />
+            )}
+          />
+          {errors.email && (
+            <Form.Text className={styles.formErrorText}>
+              {errors.email.message}
+            </Form.Text>
+          )}
+        </Form.Group>
+
+        <Form.Group className={styles.formGroup}>
+          <Form.Label className={styles.labelText}>Password</Form.Label>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <Form.Control
+                {...field}
+                type="password"
+                className={styles.formControl}
+                isInvalid={!!errors.password}
+              />
+            )}
+          />
+          {errors.password && (
+            <Form.Text className={styles.formErrorText}>
+              {errors.password.message}
+            </Form.Text>
+          )}
+        </Form.Group>
+
+        <Button className={styles.formButton} type="submit">
+          Sign in
+        </Button>
+        {showApiError && (
+          <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
+        )}
+        <div className={styles.createAccountText}>
+          <div className={styles.createAccountTextLeft}>
+            Do you want to create an account?
+          </div>
+          <Link to={routes.SIGNUP} className={styles.createAccountTextRight}>
+            Sign up
+          </Link>
+        </div>
+      </Form>
     </Container>
   )
 }

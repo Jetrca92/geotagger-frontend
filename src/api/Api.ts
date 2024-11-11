@@ -4,7 +4,6 @@ import Axios, {
   AxiosRequestHeaders,
 } from 'axios'
 import { apiMethods } from 'constants/apiConstants'
-import { userStorage } from 'utils/localStorage'
 
 export async function apiRequest<D = Record<string, unknown>, R = unknown>(
   method:
