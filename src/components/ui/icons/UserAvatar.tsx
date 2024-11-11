@@ -2,21 +2,18 @@ import { FC } from 'react'
 import styles from 'styles/scss/auth.module.scss'
 import personIcon from 'styles/icons/person.png'
 
-interface Props {
+interface UserAvatarProps {
   avatarSrc?: string
 }
 
-const UserAvatar: FC<Props> = ({ avatarSrc }) => {
-  if (avatarSrc)
-    return (
-      <div className={styles.userAvatar}>
-        <img src={avatarSrc} alt="person" className={styles.userAvatarImage} />
-      </div>
-    )
-
+const UserAvatar: FC<UserAvatarProps> = ({ avatarSrc }) => {
   return (
-    <div className={styles.emptyAvatar}>
-      <img src={personIcon} alt="person" className={styles.emptyAvatarIcon} />
+    <div className={avatarSrc ? styles.userAvatar : styles.emptyAvatar}>
+      <img
+        src={avatarSrc || personIcon}
+        alt={avatarSrc ? 'User avatar' : 'Default avatar icon'}
+        className={avatarSrc ? styles.userAvatarImage : styles.emptyAvatarIcon}
+      />
     </div>
   )
 }

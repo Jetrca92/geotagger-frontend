@@ -1,24 +1,32 @@
 import { FC } from 'react'
 import { Button } from 'react-bootstrap'
 import styles from 'styles/scss/custom-bootstrap.module.scss'
-import EmptyAvatarSm from '../icons/EmptyAvatarSm'
+import UserAvatar from '../icons/UserAvatar'
 
-interface Props {
+interface UserProfileButtonProps {
+  avatarSrc?: string
   points?: number
 }
 
-const UserProfileButton: FC<Props> = ({ points }) => {
-  if (points) {
-    return (
-      <Button className={styles.customUserProfileButtonWithPoints}>
-        <EmptyAvatarSm />
-        <span className={styles.customUserProfilePoints}>{points}</span>
-      </Button>
-    )
-  }
+const UserProfileButton: FC<UserProfileButtonProps> = ({
+  avatarSrc,
+  points = 0,
+}) => {
   return (
-    <Button className={styles.customUserProfileButton}>
-      <EmptyAvatarSm />
+    <Button
+      className={
+        points
+          ? styles.customUserProfileButtonWithPoints
+          : styles.customUserProfileButton
+      }
+    >
+      <div className={styles.customUserProfileAvatarDiv}>
+        <UserAvatar avatarSrc={avatarSrc} />
+      </div>
+
+      {points > 0 && (
+        <span className={styles.customUserProfilePoints}>{points}</span>
+      )}
     </Button>
   )
 }
