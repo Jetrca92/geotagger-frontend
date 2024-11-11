@@ -4,3 +4,8 @@ export enum StatusCode {
   'UNAUTHORIZED' = 401,
   'FORBIDDEN' = 403,
 }
+
+export enum ErrorType {
+  'API' = 'api',
+  'FILE' = 'file',
+}

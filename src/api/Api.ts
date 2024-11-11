@@ -1,7 +1,20 @@
-import Axios, { AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
+import Axios, {
+  AxiosHeaders,
+  AxiosRequestConfig,
+  AxiosRequestHeaders,
+} from 'axios'
+import { apiMethods } from 'constants/apiConstants'
+import { userStorage } from 'utils/localStorage'
 
 export async function apiRequest<D = Record<string, unknown>, R = unknown>(
-  method: 'get' | 'delete' | 'head' | 'options' | 'post' | 'put' | 'patch',
+  method:
+    | apiMethods.GET
+    | apiMethods.DELETE
+    | apiMethods.HEAD
+    | apiMethods.OPTIONS
+    | apiMethods.POST
+    | apiMethods.PUT
+    | apiMethods.PATCH,
   path: string,
   input?: D,
   options?: {
@@ -22,6 +35,40 @@ export async function apiRequest<D = Record<string, unknown>, R = unknown>(
   } catch (error: any) {
     return error.response
   }
+}
+
+export async function apiRequestWithAuthHeaders<
+  D = Record<string, unknown>,
+  R = unknown,
+>(
+  method:
+    | apiMethods.GET
+    | apiMethods.DELETE
+    | apiMethods.HEAD
+    | apiMethods.OPTIONS
+    | apiMethods.POST
+    | apiMethods.PUT
+    | apiMethods.PATCH,
+  path: string,
+  token: string,
+  input?: D,
+  options?: AxiosRequestConfig,
+) {
+  const headers = new AxiosHeaders()
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`)
+  }
+
+  if (options?.headers) {
+    Object.entries(options.headers).forEach(([key, value]) => {
+      headers.set(key, value as string)
+    })
+  }
+
+  return apiRequest(method, path, input, {
+    ...options,
+    headers: headers,
+  })
 }
 
 export * from './Auth'

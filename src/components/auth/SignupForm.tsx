@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { Button, Col, Container, Form, Row } from 'react-bootstrap'
 import styles from 'styles/scss/auth.module.scss'
 import eyeIcon from 'styles/icons/eye.png'
@@ -12,26 +12,40 @@ import {
 import * as API from 'api/Api'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from 'stores/authSlice'
-import { clearError, setError } from 'stores/errorSlice'
+import { clearAllErrors, setError } from 'stores/errorSlice'
 import { routes } from 'constants/routesConstants'
 import { Controller } from 'react-hook-form'
 import { RootState } from 'stores/store'
+import { ErrorType } from 'constants/errorConstants'
+import { isValidFile } from 'utils/fileUtils'
 
 const SignupForm: FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearAllErrors())
   }, [dispatch])
 
-  const { apiError, showError } = useSelector((state: RootState) => state.error)
+  const { apiError, fileError, showApiError, showFileError } = useSelector(
+    (state: RootState) => state.error,
+  )
   const navigate = useNavigate()
   const { handleSubmit, errors, control } = useRegisterForm()
+  const [file, setFile] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(null)
 
   const onSubmit = handleSubmit(async (data: RegisterUserFields) => {
+    if (!file) {
+      dispatch(
+        setError({ type: ErrorType.FILE, message: 'Please upload an avatar' }),
+      )
+      return
+    }
     const { confirmPassword, ...submitData } = data
     const response = await API.signup(submitData)
     if (response.data?.statusCode) {
-      dispatch(setError(response.data.message))
+      dispatch(
+        setError({ type: ErrorType.API, message: response.data.message }),
+      )
     } else {
       // Login user
       const loginResponse = await API.login({
@@ -39,18 +53,76 @@ const SignupForm: FC = () => {
         password: data.password,
       })
       if (loginResponse.data?.statusCode) {
-        dispatch(setError(loginResponse.data.message))
+        dispatch(
+          setError({
+            type: ErrorType.API,
+            message: loginResponse.data.message,
+          }),
+        )
       } else {
+        // upload image
+        try {
+          const formData = new FormData()
+          formData.append('image', file as File, file?.name)
+
+          const imageResponse = await API.uploadImage(
+            loginResponse.data.access_token,
+            formData,
+            response.data.id,
+          )
+          if (imageResponse.data?.statusCode) {
+            dispatch(
+              setError({
+                type: ErrorType.FILE,
+                message: imageResponse.data.message,
+              }),
+            )
+            return
+          }
+        } catch (error) {
+          console.log(error)
+          dispatch(
+            setError({
+              type: ErrorType.FILE,
+              message: 'Failed to upload a file.',
+            }),
+          )
+          return
+        }
         try {
           const user = await API.fetchUser(loginResponse.data.access_token)
           dispatch(login({ user, token: loginResponse.data.access_token }))
           navigate('/')
         } catch (error) {
-          dispatch(setError('Failed to fetch user information'))
+          dispatch(
+            setError({
+              type: ErrorType.API,
+              message: 'Failed to fetch user information.',
+            }),
+          )
         }
       }
     }
   })
+
+  const handleFileChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    if (target.files) {
+      const myfile = target.files[0]
+      if (!isValidFile(myfile, dispatch)) return
+      setFile(myfile)
+    }
+  }
+
+  useEffect(() => {
+    if (!file) {
+      setPreview(null)
+      return
+    }
+    const reader = new FileReader()
+    reader.onloadend = () => setPreview(reader.result as string)
+    reader.readAsDataURL(file)
+  }, [file])
+
   const [showPassword, setShowPassword] = useState(false)
   const [showRepeatPassword, setShowRepeatPassword] = useState(false)
 
@@ -69,8 +141,25 @@ const SignupForm: FC = () => {
       <Form onSubmit={onSubmit}>
         <Form.Group className={styles.formGroupCentered}>
           <div className={styles.emptyAvatar}>
-            <UserAvatar />
+            {preview ? (
+              <UserAvatar avatarSrc={preview} />
+            ) : (
+              <>
+                <label htmlFor="image" className={styles.addAvatarButton}>
+                  <UserAvatar />
+                </label>
+                <input
+                  onChange={handleFileChange}
+                  id="image"
+                  name="image"
+                  type="file"
+                />
+              </>
+            )}
           </div>
+          {showFileError && (
+            <Form.Text className={styles.formErrorText}>{fileError}</Form.Text>
+          )}
         </Form.Group>
 
         <Form.Group className={styles.formGroup}>
@@ -203,7 +292,7 @@ const SignupForm: FC = () => {
         <Button className={styles.formButton} type="submit">
           Sign up
         </Button>
-        {showError && (
+        {showApiError && (
           <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
         )}
         <div className={styles.createAccountText}>

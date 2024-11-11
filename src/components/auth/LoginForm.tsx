@@ -7,17 +7,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Controller } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from 'stores/authSlice'
-import { clearError, setError } from 'stores/errorSlice'
+import { clearAllErrors, setError } from 'stores/errorSlice'
 import { RootState } from 'stores/store'
 import { routes } from 'constants/routesConstants'
+import { ErrorType } from 'constants/errorConstants'
 
 const LoginForm: FC = () => {
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(clearError())
+    dispatch(clearAllErrors())
   }, [dispatch])
 
-  const { apiError, showError } = useSelector((state: RootState) => state.error)
+  const { apiError, showApiError } = useSelector(
+    (state: RootState) => state.error,
+  )
   const navigate = useNavigate()
 
   const { handleSubmit, errors, control } = useLoginForm()
@@ -33,7 +36,12 @@ const LoginForm: FC = () => {
       dispatch(login({ user, token: response.data.access_token }))
       navigate('/')
     } catch (error) {
-      dispatch(setError('Failed to fetch user information'))
+      dispatch(
+        setError({
+          type: ErrorType.API,
+          message: 'Failed to fetch user information.',
+        }),
+      )
     }
   })
 
@@ -90,7 +98,7 @@ const LoginForm: FC = () => {
           <Button className={styles.formButton} type="submit">
             Sign in
           </Button>
-          {showError && (
+          {showApiError && (
             <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
           )}
           <div className={styles.createAccountText}>
