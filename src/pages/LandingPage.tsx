@@ -6,13 +6,15 @@ import LandingPageHero from 'components/ui/hero/LandingPageHero'
 import Layout from 'components/ui/Layout'
 import { FC } from 'react'
 import { Container } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { selectUser } from 'stores/authSlice'
 import styles from 'styles/scss/pages.module.scss'
-import { userStorage } from 'utils/localStorage'
 
 const LandingPage: FC = () => {
-  const user = userStorage.getUser()
+  const user = useSelector(selectUser)
   const guesses = [1, 5, 12]
   const locations = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
   return (
     <Layout>
       {user ? (

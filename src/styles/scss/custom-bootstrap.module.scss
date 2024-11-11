@@ -416,6 +416,26 @@
   padding: 8px 16px;
   height: 35px;
   color: #000000;
+
+  &:focus {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &:active {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &.error {
+    border: 1px solid #fda29b !important;
+    box-shadow: none;
+  }
+}
+
+.profileSettingsModalFormErrorText {
+  color: #f04438;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
 .profileSettingsModalFormRow {

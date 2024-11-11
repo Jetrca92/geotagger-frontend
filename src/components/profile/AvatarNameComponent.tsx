@@ -12,7 +12,9 @@ interface Props {
 const AvatarNameComponent: FC<Props> = ({ avatarSrc, firstName, lastName }) => {
   return (
     <Container className={styles.userAvatarNameContainer}>
-      <UserAvatar />
+      <div className={styles.userAvatarDiv}>
+        <UserAvatar avatarSrc={avatarSrc} />
+      </div>
       <h4
         className={styles.userAvatarNameText}
       >{`${firstName} ${lastName}`}</h4>

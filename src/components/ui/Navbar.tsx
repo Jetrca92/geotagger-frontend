@@ -14,7 +14,6 @@ import { selectUser, signout } from 'stores/authSlice'
 const NavbarComponent: FC = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  console.log(user)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
 
   const handleCloseProfileSettings = () => setShowProfileSettings(false)
@@ -47,7 +46,7 @@ const NavbarComponent: FC = () => {
                   Home
                 </Link>
                 <div
-                  className={styles.link}
+                  className={styles.linkCursor}
                   onClick={handleShowProfileSettings}
                 >
                   Profile settings
@@ -56,12 +55,12 @@ const NavbarComponent: FC = () => {
                   Logout
                 </Link>
                 <div className={styles.navbarUserButtonsContainer}>
-                  {user.avatarUrl ? (
-                    <UserProfileButton avatarSrc={user.avatarUrl} />
-                  ) : (
-                    <UserProfileButton />
-                  )}
-
+                  <Link to={routes.PROFILE} className={styles.link}>
+                    <UserProfileButton
+                      avatarSrc={user.avatarUrl}
+                      points={user.points}
+                    />
+                  </Link>
                   <AddButton />
                 </div>
               </Nav>

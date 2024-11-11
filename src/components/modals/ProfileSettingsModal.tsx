@@ -1,6 +1,8 @@
-import CancelButton from 'components/ui/button/CancelButton'
+import ProfileSettingsForm from 'components/profile/ProfileSettingsForm'
 import { FC } from 'react'
-import { Button, Col, Form, Modal, Row } from 'react-bootstrap'
+import { Modal } from 'react-bootstrap'
+import { useSelector } from 'react-redux'
+import { selectUser } from 'stores/authSlice'
 import styles from 'styles/scss/custom-bootstrap.module.scss'
 
 interface Props {
@@ -9,6 +11,23 @@ interface Props {
 }
 
 const ProfileSettingsModal: FC<Props> = ({ show, onHide }) => {
+  const user = useSelector(selectUser)
+  if (!user)
+    return (
+      <Modal show={show} onHide={onHide}>
+        <Modal.Body className={styles.customModalBody}>
+          <h5 className={styles.customModalTitleH5}>
+            <span className={styles.blackText}>Profile </span>
+            <span className={styles.primaryText}>settings</span>
+            <span className={styles.blackText}>.</span>
+          </h5>
+          <div className={styles.customModalText}>
+            Please login to update your profile.
+          </div>
+        </Modal.Body>
+      </Modal>
+    )
+
   return (
     <Modal show={show} onHide={onHide}>
       <Modal.Body className={styles.customModalBody}>
@@ -18,68 +37,7 @@ const ProfileSettingsModal: FC<Props> = ({ show, onHide }) => {
           <span className={styles.blackText}>.</span>
         </h5>
         <div className={styles.customModalText}>Change your information.</div>
-        <Form className={`${styles.profileSettingsModalForm} container-fluid`}>
-          <Form.Group className={styles.profileSettingsModalFormGroup}>
-            <Form.Label className={styles.profileSettingsModalFormLabelText}>
-              Email
-            </Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="hey@geotagger.com"
-              className={styles.profileSettingsModalFormControl}
-            />
-          </Form.Group>
-
-          <Row className={styles.profileSettingsModalFormRow}>
-            <Col className={styles.profileSettingsModalFormCol}>
-              <Form.Group className={styles.profileSettingsModalFormGroup}>
-                <Form.Label
-                  className={styles.profileSettingsModalFormLabelText}
-                >
-                  First name
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="John"
-                  className={styles.profileSettingsModalFormControl}
-                />
-              </Form.Group>
-            </Col>
-
-            <Col className={styles.profileSettingsModalFormCol}>
-              <Form.Group className={styles.profileSettingsModalFormGroup}>
-                <Form.Label
-                  className={styles.profileSettingsModalFormLabelText}
-                >
-                  Last name
-                </Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Doe"
-                  className={styles.profileSettingsModalFormControl}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-
-          <div className={styles.profileSettingsLinksDiv}>
-            <div className={styles.profileSettingsLink}>Change password</div>
-            <div className={styles.profileSettingsLink}>
-              Change profile picture
-            </div>
-          </div>
-
-          <div className={styles.customModalButtons}>
-            <div onClick={onHide}>
-              <CancelButton text="Cancel" />
-            </div>
-            <div className={styles.submitButtonDiv}>
-              <Button className={styles.formButton} type="submit">
-                Submit
-              </Button>
-            </div>
-          </div>
-        </Form>
+        <ProfileSettingsForm user={user} onHide={onHide} />
       </Modal.Body>
     </Modal>
   )

@@ -24,6 +24,11 @@ const authSlice = createSlice({
       userStorage.setUser(user)
       state.user = user
     },
+    updateUser: (state, action: PayloadAction<{ user: UserType }>) => {
+      const { user } = action.payload
+      userStorage.setUser(user)
+      state.user = user
+    },
     signout: (state) => {
       userStorage.clearUser()
       userStorage.clearToken()
@@ -32,7 +37,7 @@ const authSlice = createSlice({
   },
 })
 
-export const { login, signout } = authSlice.actions
+export const { login, updateUser, signout } = authSlice.actions
 
 export const selectUser = (state: RootState) => state.auth.user
 

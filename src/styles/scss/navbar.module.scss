@@ -51,6 +51,11 @@
   text-decoration: none;
 }
 
+.linkCursor {
+  @extend .link;
+  cursor: pointer;
+}
+
 .signInLink {
   @extend .link;
   font-weight: 600;
