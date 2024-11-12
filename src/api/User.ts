@@ -3,6 +3,10 @@ import { apiRequestWithAuthHeaders } from './Api'
 import { UserType } from 'models/auth'
 import { ChangePasswordFormFields } from 'hooks/react-hook-form/useChangePassword'
 import { ProfileSettingsFields } from 'hooks/react-hook-form/useProfileSettingsForm'
+import {
+  ApiProfileSettingsPasswordFields,
+  ProfileSettingsPasswordFields,
+} from 'hooks/react-hook-form/useProfileSettingsPasswordForm'
 
 export const fetchUser = async (token: string) => {
   const response = await apiRequestWithAuthHeaders<void, UserType>(
@@ -46,5 +50,16 @@ export const updateUser = async (
     ProfileSettingsFields,
     UserType
   >(apiMethods.PATCH, apiRoutes.UPDATE_USER, token, data)
+  return response.data
+}
+
+export const updateUserPassword = async (
+  token: string,
+  data: ApiProfileSettingsPasswordFields,
+) => {
+  const response = await apiRequestWithAuthHeaders<
+    ApiProfileSettingsPasswordFields,
+    UserType
+  >(apiMethods.PATCH, apiRoutes.UPDATE_PASSWORD, token, data)
   return response.data
 }

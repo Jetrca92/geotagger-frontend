@@ -1,4 +1,4 @@
-import ProfileSettingsForm from 'components/profile/ProfileSettingsForm'
+import ProfileSettingsPasswordForm from 'components/profile/ProfileSettingsPasswordForm'
 import { FC } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
@@ -9,22 +9,14 @@ interface Props {
   show: boolean
   onHide: () => void
   onSave: () => void
-  showPassword: () => void
-  showPicture: () => void
 }
 
-const ProfileSettingsModal: FC<Props> = ({
-  show,
-  onHide,
-  onSave,
-  showPassword,
-  showPicture,
-}) => {
+const ProfileSettingsPasswordModal: FC<Props> = ({ show, onHide, onSave }) => {
   const user = useSelector(selectUser)
   if (!user)
     return (
       <Modal show={show} onHide={onHide}>
-        <Modal.Body className={styles.customModalBody}>
+        <Modal.Body className={styles.customModalPasswordBody}>
           <h5 className={styles.customModalTitleH5}>
             <span className={styles.blackText}>Profile </span>
             <span className={styles.primaryText}>settings</span>
@@ -39,23 +31,17 @@ const ProfileSettingsModal: FC<Props> = ({
 
   return (
     <Modal show={show} onHide={onHide}>
-      <Modal.Body className={styles.customModalBody}>
+      <Modal.Body className={styles.customModalPasswordBody}>
         <h5 className={styles.customModalTitleH5}>
           <span className={styles.blackText}>Profile </span>
           <span className={styles.primaryText}>settings</span>
           <span className={styles.blackText}>.</span>
         </h5>
-        <div className={styles.customModalText}>Change your information.</div>
-        <ProfileSettingsForm
-          user={user}
-          onHide={onHide}
-          onSave={onSave}
-          showPassword={showPassword}
-          showPicture={showPicture}
-        />
+        <div className={styles.customModalText}>Change your password.</div>
+        <ProfileSettingsPasswordForm onHide={onHide} onSave={onSave} />
       </Modal.Body>
     </Modal>
   )
 }
 
-export default ProfileSettingsModal
+export default ProfileSettingsPasswordModal

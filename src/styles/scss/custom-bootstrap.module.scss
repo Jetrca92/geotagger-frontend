@@ -324,6 +324,11 @@
   width: 593px;
 }
 
+.customModalPasswordBody {
+  @extend .customModalBody;
+  gap: 32px !important;
+}
+
 .customModalTitle {
   font-weight: 400;
   line-height: 39.84px;
@@ -395,10 +400,11 @@
   flex-direction: column;
   gap: 16px;
   width: 529px;
+  padding: 0px;
 }
 
 .profileSettingsModalFormGroup {
-  height: 60px;
+  min-height: 60px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -468,4 +474,18 @@
 .customUserProfileAvatarDiv {
   height: 40px;
   width: 40px;
+}
+
+.inputWithIcon {
+  position: relative;
+  width: 100%;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
 }

@@ -1,4 +1,3 @@
-import ProfileSettingsForm from 'components/profile/ProfileSettingsForm'
 import { FC } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
@@ -8,18 +7,9 @@ import styles from 'styles/scss/custom-bootstrap.module.scss'
 interface Props {
   show: boolean
   onHide: () => void
-  onSave: () => void
-  showPassword: () => void
-  showPicture: () => void
 }
 
-const ProfileSettingsModal: FC<Props> = ({
-  show,
-  onHide,
-  onSave,
-  showPassword,
-  showPicture,
-}) => {
+const ProfileSettingsPictureModal: FC<Props> = ({ show, onHide }) => {
   const user = useSelector(selectUser)
   if (!user)
     return (
@@ -45,17 +35,10 @@ const ProfileSettingsModal: FC<Props> = ({
           <span className={styles.primaryText}>settings</span>
           <span className={styles.blackText}>.</span>
         </h5>
-        <div className={styles.customModalText}>Change your information.</div>
-        <ProfileSettingsForm
-          user={user}
-          onHide={onHide}
-          onSave={onSave}
-          showPassword={showPassword}
-          showPicture={showPicture}
-        />
+        <div className={styles.customModalText}>Change your profile photo.</div>
       </Modal.Body>
     </Modal>
   )
 }
 
-export default ProfileSettingsModal
+export default ProfileSettingsPictureModal

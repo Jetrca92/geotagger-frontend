@@ -11,17 +11,35 @@ import { routes } from 'constants/routesConstants'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser, signout } from 'stores/authSlice'
 import SettingsSavedModal from 'components/modals/SettingsSavedModal'
+import ProfileSettingsPasswordModal from 'components/modals/ProfileSettingsPasswordModal'
+import ProfileSettingsPictureModal from 'components/modals/ProfileSettingsPictureModal'
 
 const NavbarComponent: FC = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
+
   const [showProfileSettings, setShowProfileSettings] = useState(false)
   const [showSettingsSaved, setShowSettingsSaved] = useState(false)
+  const [showProfileSettingsPassword, setShowProfileSettingsPassword] =
+    useState(false)
+  const [showProfileSettingsPicture, setShowProfileSettingsPicture] =
+    useState(false)
 
   const handleCloseProfileSettings = () => setShowProfileSettings(false)
   const handleShowProfileSettings = () => setShowProfileSettings(true)
+
   const handleCloseSettingsSaved = () => setShowSettingsSaved(false)
   const handleShowSettingsSaved = () => setShowSettingsSaved(true)
+
+  const handleCloseProfileSettingsPassword = () =>
+    setShowProfileSettingsPassword(false)
+  const handleCloseProfileSettingsPicture = () =>
+    setShowProfileSettingsPicture(false)
+
+  const handleShowProfileSettingsPassword = () =>
+    setShowProfileSettingsPassword(true)
+  const handleShowProfileSettingsPicture = () =>
+    setShowProfileSettingsPicture(true)
 
   const logout = () => {
     dispatch(signout())
@@ -97,10 +115,21 @@ const NavbarComponent: FC = () => {
         show={showProfileSettings}
         onHide={handleCloseProfileSettings}
         onSave={handleShowSettingsSaved}
+        showPassword={handleShowProfileSettingsPassword}
+        showPicture={handleShowProfileSettingsPicture}
       />
       <SettingsSavedModal
         show={showSettingsSaved}
         onHide={handleCloseSettingsSaved}
+      />
+      <ProfileSettingsPasswordModal
+        show={showProfileSettingsPassword}
+        onHide={handleCloseProfileSettingsPassword}
+        onSave={handleShowSettingsSaved}
+      />
+      <ProfileSettingsPictureModal
+        show={showProfileSettingsPicture}
+        onHide={handleCloseProfileSettingsPicture}
       />
     </Container>
   )

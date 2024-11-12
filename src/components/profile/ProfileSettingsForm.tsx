@@ -20,9 +20,17 @@ interface Props {
   user: UserType
   onHide: () => void
   onSave: () => void
+  showPassword: () => void
+  showPicture: () => void
 }
 
-const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
+const ProfileSettingsForm: FC<Props> = ({
+  user,
+  onHide,
+  onSave,
+  showPassword,
+  showPicture,
+}) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(clearAllErrors())
@@ -32,6 +40,15 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
     (state: RootState) => state.error,
   )
 
+  const handleShowPassword = () => {
+    onHide()
+    showPassword()
+  }
+
+  const handleShowPicture = () => {
+    onHide()
+    showPicture()
+  }
   const { handleSubmit, errors, control } = useProfileSettingsForm(user)
 
   const onSubmit = handleSubmit(async (data: ProfileSettingsFields) => {
@@ -42,10 +59,8 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
     }
     try {
       const response = await API.updateUser(token, data)
-      if (response.data?.statusCode) {
-        dispatch(
-          setError({ type: ErrorType.API, message: response.data.message }),
-        )
+      if (response.statusCode) {
+        dispatch(setError({ type: ErrorType.API, message: response.message }))
         return
       }
       dispatch(updateUser({ user: response }))
@@ -108,7 +123,7 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
               )}
             />
             {errors.firstName && (
-              <Form.Text className={styles.formErrorText}>
+              <Form.Text className={styles.profileSettingsModalFormErrorText}>
                 {errors.firstName.message}
               </Form.Text>
             )}
@@ -133,7 +148,7 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
               )}
             />
             {errors.lastName && (
-              <Form.Text className={styles.formErrorText}>
+              <Form.Text className={styles.profileSettingsModalFormErrorText}>
                 {errors.lastName.message}
               </Form.Text>
             )}
@@ -142,8 +157,15 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
       </Row>
 
       <div className={styles.profileSettingsLinksDiv}>
-        <div className={styles.profileSettingsLink}>Change password</div>
-        <div className={styles.profileSettingsLink}>Change profile picture</div>
+        <div
+          className={styles.profileSettingsLink}
+          onClick={handleShowPassword}
+        >
+          Change password
+        </div>
+        <div className={styles.profileSettingsLink} onClick={handleShowPicture}>
+          Change profile picture
+        </div>
       </div>
 
       <div className={styles.customModalButtons}>
