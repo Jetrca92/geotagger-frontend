@@ -8,9 +8,10 @@ import styles from 'styles/scss/custom-bootstrap.module.scss'
 interface Props {
   show: boolean
   onHide: () => void
+  onSave: () => void
 }
 
-const ProfileSettingsModal: FC<Props> = ({ show, onHide }) => {
+const ProfileSettingsModal: FC<Props> = ({ show, onHide, onSave }) => {
   const user = useSelector(selectUser)
   if (!user)
     return (
@@ -37,7 +38,7 @@ const ProfileSettingsModal: FC<Props> = ({ show, onHide }) => {
           <span className={styles.blackText}>.</span>
         </h5>
         <div className={styles.customModalText}>Change your information.</div>
-        <ProfileSettingsForm user={user} onHide={onHide} />
+        <ProfileSettingsForm user={user} onHide={onHide} onSave={onSave} />
       </Modal.Body>
     </Modal>
   )

@@ -19,9 +19,10 @@ import { updateUser } from 'stores/authSlice'
 interface Props {
   user: UserType
   onHide: () => void
+  onSave: () => void
 }
 
-const ProfileSettingsForm: FC<Props> = ({ user, onHide }) => {
+const ProfileSettingsForm: FC<Props> = ({ user, onHide, onSave }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(clearAllErrors())
@@ -48,8 +49,8 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide }) => {
         return
       }
       dispatch(updateUser({ user: response }))
-      console.log(userStorage.getUser())
       onHide()
+      onSave()
     } catch (error) {
       dispatch(
         setError({

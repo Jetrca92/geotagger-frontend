@@ -10,14 +10,18 @@ import ProfileSettingsModal from 'components/modals/ProfileSettingsModal'
 import { routes } from 'constants/routesConstants'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser, signout } from 'stores/authSlice'
+import SettingsSavedModal from 'components/modals/SettingsSavedModal'
 
 const NavbarComponent: FC = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
   const [showProfileSettings, setShowProfileSettings] = useState(false)
+  const [showSettingsSaved, setShowSettingsSaved] = useState(false)
 
   const handleCloseProfileSettings = () => setShowProfileSettings(false)
   const handleShowProfileSettings = () => setShowProfileSettings(true)
+  const handleCloseSettingsSaved = () => setShowSettingsSaved(false)
+  const handleShowSettingsSaved = () => setShowSettingsSaved(true)
 
   const logout = () => {
     dispatch(signout())
@@ -92,6 +96,11 @@ const NavbarComponent: FC = () => {
       <ProfileSettingsModal
         show={showProfileSettings}
         onHide={handleCloseProfileSettings}
+        onSave={handleShowSettingsSaved}
+      />
+      <SettingsSavedModal
+        show={showSettingsSaved}
+        onHide={handleCloseSettingsSaved}
       />
     </Container>
   )
