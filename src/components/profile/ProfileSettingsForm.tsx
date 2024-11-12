@@ -41,15 +41,14 @@ const ProfileSettingsForm: FC<Props> = ({ user, onHide }) => {
     }
     try {
       const response = await API.updateUser(token, data)
-      console.log(response)
-      console.log(response.data)
       if (response.data?.statusCode) {
         dispatch(
           setError({ type: ErrorType.API, message: response.data.message }),
         )
         return
       }
-      dispatch(updateUser(response))
+      dispatch(updateUser({ user: response }))
+      console.log(userStorage.getUser())
       onHide()
     } catch (error) {
       dispatch(

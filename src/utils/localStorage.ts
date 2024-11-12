@@ -4,11 +4,15 @@ const user_prefix = 'user'
 const token_prefix = 'token'
 
 const userStorage = {
-  getUser: (): UserType => {
-    if (typeof window === 'undefined') return {} as UserType
-    return JSON.parse(
-      window.localStorage.getItem(`${user_prefix}`) as string,
-    ) as UserType
+  getUser: (): UserType | null => {
+    if (typeof window === 'undefined') return null
+    const userData = window.localStorage.getItem(user_prefix)
+    try {
+      return userData ? (JSON.parse(userData) as UserType) : null
+    } catch (error) {
+      console.error('Error parsing user data from localStorage:', error)
+      return null
+    }
   },
   setUser: (user: UserType): void => {
     window.localStorage.setItem(`${user_prefix}`, JSON.stringify(user))
