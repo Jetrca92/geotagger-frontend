@@ -122,7 +122,7 @@ const SignupForm: FC = () => {
       </div>
       <Form onSubmit={onSubmit}>
         <Form.Group className={styles.formGroupCentered}>
-          <div className={styles.emptyAvatar}>
+          <div className={styles.addAvatarButton}>
             {preview ? (
               <UserAvatar avatarSrc={preview} />
             ) : (
@@ -135,6 +135,7 @@ const SignupForm: FC = () => {
                   id="image"
                   name="image"
                   type="file"
+                  style={{ display: 'none' }}
                 />
               </>
             )}

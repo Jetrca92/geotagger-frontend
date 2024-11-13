@@ -28,11 +28,12 @@ export const uploadUserAvatar = async (
     formData.append('image', file as File, file?.name)
     const imageResponse = await API.uploadImage(token, formData, userId)
 
-    if (imageResponse.data?.statusCode) {
+    if (imageResponse.statusCode) {
       dispatch(
-        setError({ type: ErrorType.FILE, message: imageResponse.data.message }),
+        setError({ type: ErrorType.FILE, message: imageResponse.message }),
       )
     }
+    return imageResponse
   } catch {
     dispatch(
       setError({

@@ -130,6 +130,7 @@ const NavbarComponent: FC = () => {
       <ProfileSettingsPictureModal
         show={showProfileSettingsPicture}
         onHide={handleCloseProfileSettingsPicture}
+        onSave={handleShowSettingsSaved}
       />
     </Container>
   )
