@@ -43,3 +43,30 @@ export const uploadUserAvatar = async (
     )
   }
 }
+
+export const uploadLocationImage = async (
+  id: string,
+  token: string,
+  file: File,
+  dispatch: AppDispatch,
+) => {
+  try {
+    const formData = new FormData()
+    formData.append('image', file as File, file?.name)
+    const imageResponse = await API.uploadLocationImage(token, formData, id)
+
+    if (imageResponse.statusCode) {
+      dispatch(
+        setError({ type: ErrorType.FILE, message: imageResponse.message }),
+      )
+    }
+    return imageResponse
+  } catch {
+    dispatch(
+      setError({
+        type: ErrorType.FILE,
+        message: 'Failed to upload location image.',
+      }),
+    )
+  }
+}

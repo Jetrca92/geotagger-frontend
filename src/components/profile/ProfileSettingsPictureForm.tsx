@@ -85,23 +85,21 @@ const ProfileSettingsPictureForm: FC<Props> = ({ onHide, onSave, user }) => {
         <div className={styles.currentAvatarDiv}>
           <UserAvatar avatarSrc={preview || user.avatarUrl} />
         </div>
-        <>
-          <label htmlFor="image">
-            <div
-              className={styles.customSecondaryButton}
-              style={{ cursor: 'pointer' }}
-            >
-              Upload new picture
-            </div>
-          </label>
-          <input
-            onChange={handleFileChange}
-            id="image"
-            name="image"
-            type="file"
-            style={{ display: 'none' }}
-          />
-        </>
+        <Form.Label htmlFor="image">
+          <div
+            className={styles.customSecondaryButton}
+            style={{ cursor: 'pointer' }}
+          >
+            Upload new picture
+          </div>
+        </Form.Label>
+        <Form.Control
+          onChange={handleFileChange}
+          id="image"
+          name="image"
+          type="file"
+          style={{ display: 'none' }}
+        />
         {showFileError && (
           <Form.Text className={styles.profileSettingsModalFormErrorText}>
             {fileError}

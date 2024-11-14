@@ -1,3 +1,5 @@
+import { LocationType } from './location'
+
 export type UserType = {
   id: string
   firstName: string
@@ -5,9 +7,7 @@ export type UserType = {
   email: string
   avatarUrl?: string
   points: number
-  locations?: {
-    id: string
-  }
+  locations?: LocationType[]
   guesses?: {
     id: string
   }

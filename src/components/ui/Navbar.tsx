@@ -83,7 +83,9 @@ const NavbarComponent: FC = () => {
                       points={user.points}
                     />
                   </Link>
-                  <AddButton />
+                  <Link to={routes.ADD_LOCATION}>
+                    <AddButton />
+                  </Link>
                 </div>
               </Nav>
             </Navbar.Collapse>

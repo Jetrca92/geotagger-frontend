@@ -10,6 +10,10 @@ export enum apiRoutes {
   UPLOAD_USER_IMAGE_PREFIX = '/user/upload',
   UPDATE_USER = 'user/update-user',
   UPDATE_PASSWORD = '/user/update-password',
+  // Location
+  LOCATION_PREFIX = '/location',
+  RANDOM_LOCATION = '/location/random,',
+  UPLOAD_LOCATION_IMAGE_PREFIX = '/location/upload',
 }
 
 export enum apiMethods {

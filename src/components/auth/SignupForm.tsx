@@ -127,10 +127,10 @@ const SignupForm: FC = () => {
               <UserAvatar avatarSrc={preview} />
             ) : (
               <>
-                <label htmlFor="image" className={styles.addAvatarButton}>
+                <Form.Label htmlFor="image" className={styles.addAvatarButton}>
                   <UserAvatar />
-                </label>
-                <input
+                </Form.Label>
+                <Form.Control
                   onChange={handleFileChange}
                   id="image"
                   name="image"

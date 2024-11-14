@@ -4,4 +4,5 @@ export enum routes {
   HOME = '/',
   FORGOT_PASSWORD = '/forgot-password',
   PROFILE = '/profile',
+  ADD_LOCATION = '/location/add',
 }

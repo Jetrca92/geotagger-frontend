@@ -19,6 +19,7 @@ const Landing = lazy(() => import('pages/LandingPage'))
 
 /* Private routes */
 const Profile = lazy(() => import('pages/ProfilePage'))
+const AddLocation = lazy(() => import('pages/AddLocationPage'))
 
 /* Restricted routes */
 const Login = lazy(() => import('pages/LoginPage'))
@@ -56,6 +57,11 @@ export const AppRoutes: AppRoute[] = [
     type: RouteType.PRIVATE,
     path: routes.PROFILE,
     children: <Profile />,
+  },
+  {
+    type: RouteType.PRIVATE,
+    path: routes.ADD_LOCATION,
+    children: <AddLocation />,
   },
 ]
 
