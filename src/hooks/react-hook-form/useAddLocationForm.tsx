@@ -3,24 +3,28 @@ import { useForm } from 'react-hook-form'
 import * as Yup from 'yup'
 
 export interface AddLocationFields {
-  imageUrl: string
   address: string
+  latitude: string
+  longitude: string
 }
 
 export const useAddLocationForm = () => {
   const RegisterSchema = Yup.object().shape({
-    imageUrl: Yup.string().required('Location image is required.'),
     address: Yup.string().required('Address is required.'),
+    latitude: Yup.string().required('Latitude is required.'),
+    longitude: Yup.string().required('Longitude is required.'),
   })
 
   const {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm({
     defaultValues: {
-      imageUrl: '',
       address: '',
+      latitude: '',
+      longitude: '',
     },
     mode: 'onSubmit',
     resolver: yupResolver(RegisterSchema),
@@ -30,7 +34,8 @@ export const useAddLocationForm = () => {
     handleSubmit,
     errors,
     control,
+    setValue,
   }
 }
 
-export type RegisterForm = ReturnType<typeof useAddLocationForm>
+export type AddLocationForm = ReturnType<typeof useAddLocationForm>

@@ -6,10 +6,13 @@ import { FC } from 'react'
 import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import { selectUser } from 'stores/authSlice'
+import { selectLocations } from 'stores/userSlice'
 import styles from 'styles/scss/pages.module.scss'
 
 const Profile: FC = () => {
   const user = useSelector(selectUser)
+  const locations = useSelector(selectLocations)
+
   if (!user) {
     return (
       <Layout>
@@ -30,7 +33,7 @@ const Profile: FC = () => {
           lastName={user.lastName}
         />
         <MyBestGuessesComponent guesses={guess} />
-        <MyUploadsComponent uploads={guess} />
+        <MyUploadsComponent uploads={locations} />
       </Container>
     </Layout>
   )

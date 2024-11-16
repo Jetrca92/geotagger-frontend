@@ -1,7 +1,6 @@
 import { ChangeEvent, FC, useEffect, useState } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import styles from 'styles/scss/location.module.scss'
-import mapImage from 'styles/images/map.png'
 import noLocation from 'styles/images/no-location-image.png'
 import {
   AddLocationFields,
@@ -17,11 +16,15 @@ import { userStorage } from 'utils/localStorage'
 import { useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import { Controller } from 'react-hook-form'
+import { MapContainer, TileLayer, Marker, useMapEvents } from 'react-leaflet'
+import { setupLeafletDefaultIcon } from 'utils/leafletMarkerUtils'
+import { setLocations } from 'stores/userSlice'
 
 const AddLocationForm: FC = () => {
+  setupLeafletDefaultIcon()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { handleSubmit, errors, control } = useAddLocationForm()
+  const { handleSubmit, errors, control, setValue } = useAddLocationForm()
   const { apiError, fileError, showApiError, showFileError } = useSelector(
     (state: RootState) => state.error,
   )
@@ -29,6 +32,10 @@ const AddLocationForm: FC = () => {
   const [locationImageFile, setLocationImageFile] = useState<File | null>(null)
   const [locationImagePreview, setLocationImagePreview] = useState<
     string | null
+  >(null)
+  const mapCenter = { lat: 46.361618, lng: 14.095287 } // Default to Bled
+  const [selectedPosition, setSelectedPosition] = useState<
+    [number, number] | null
   >(null)
 
   useEffect(() => {
@@ -76,6 +83,10 @@ const AddLocationForm: FC = () => {
       }
 
       await uploadLocationImage(response.id, token, locationImageFile, dispatch)
+
+      const locationsResponse = await API.getUserLocations(token)
+      dispatch(setLocations(locationsResponse))
+
       navigate(routes.PROFILE)
     } catch (error) {
       dispatch(
@@ -86,6 +97,19 @@ const AddLocationForm: FC = () => {
       )
     }
   })
+
+  const LocationSelector = () => {
+    useMapEvents({
+      click: (e) => {
+        const { lat, lng } = e.latlng
+        setSelectedPosition([lat, lng])
+        setValue('latitude', lat.toFixed(5))
+        setValue('longitude', lng.toFixed(5))
+        setValue('address', `${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+      },
+    })
+    return selectedPosition ? <Marker position={selectedPosition} /> : null
+  }
 
   return (
     <Container className={styles.addLocationFormContainer}>
@@ -124,7 +148,13 @@ const AddLocationForm: FC = () => {
           />
         </Form.Group>
 
-        <img src={mapImage} alt="map" className={styles.mapImage} />
+        <MapContainer center={mapCenter} zoom={10} className={styles.mapImage}>
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <LocationSelector />
+        </MapContainer>
 
         <Form.Group>
           <Form.Label className={styles.locationInputLabel}>
@@ -148,6 +178,30 @@ const AddLocationForm: FC = () => {
             </Form.Text>
           )}
         </Form.Group>
+
+        {/* hidden inputs for lat and long */}
+        <Controller
+          name="latitude"
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              {...field}
+              type="hidden"
+              value={selectedPosition ? selectedPosition[0] : ''}
+            />
+          )}
+        />
+        <Controller
+          name="longitude"
+          control={control}
+          render={({ field }) => (
+            <Form.Control
+              {...field}
+              type="hidden"
+              value={selectedPosition ? selectedPosition[1] : ''}
+            />
+          )}
+        />
 
         <div className={styles.formButtonDiv}>
           <Button className={styles.formButton} type="submit">

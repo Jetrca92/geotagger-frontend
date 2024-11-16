@@ -19,6 +19,15 @@ export const getRandomLocation = async () => {
   return response.data
 }
 
+export const getUserLocations = async (token: string) => {
+  const response = await apiRequestWithAuthHeaders<void, LocationType[]>(
+    apiMethods.GET,
+    apiRoutes.LOCATION_PREFIX,
+    token,
+  )
+  return response.data
+}
+
 export const addLocation = async (token: string, data: AddLocationFields) => {
   const response = await apiRequestWithAuthHeaders<
     AddLocationFields,

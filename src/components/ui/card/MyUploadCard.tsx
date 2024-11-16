@@ -5,9 +5,10 @@ import EditButton from '../button/EditButton'
 import DeleteButton from '../button/DeleteButton'
 import ConfirmDeleteModal from 'components/modals/DeleteModal'
 import DeleteModal from 'components/modals/DeleteModal'
+import noLocationImage from 'styles/images/no-location-image.png'
 
 interface Props {
-  imageSrc: string
+  imageSrc: string | undefined
 }
 
 const MyUploadCard: FC<Props> = ({ imageSrc }) => {
@@ -22,10 +23,11 @@ const MyUploadCard: FC<Props> = ({ imageSrc }) => {
   const onDelete = () => {
     setShowConfirm(true)
   }
+
   return (
     <Card className={styles.locationCard}>
       <Card.Img
-        src={imageSrc}
+        src={imageSrc ? imageSrc : noLocationImage}
         alt="card"
         className={styles.locationCardImageSm}
       />

@@ -3,10 +3,10 @@ import MyUploadCard from 'components/ui/card/MyUploadCard'
 import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
-import cardImage from 'styles/images/landing-card2.png'
+import { LocationType } from 'models/location'
 
 interface Props {
-  uploads?: number[]
+  uploads?: LocationType[]
 }
 
 const MyUploadsComponent: FC<Props> = ({ uploads }) => {
@@ -30,6 +30,7 @@ const MyUploadsComponent: FC<Props> = ({ uploads }) => {
         </div>
       </Container>
     )
+
   return (
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
@@ -42,7 +43,7 @@ const MyUploadsComponent: FC<Props> = ({ uploads }) => {
             lg={3}
             className={styles.myBestGuessesCol}
           >
-            <MyUploadCard imageSrc={cardImage} />
+            <MyUploadCard imageSrc={upload.imageUrl} />
           </Col>
         ))}
       </Row>

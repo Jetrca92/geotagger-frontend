@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css'
 import 'styles/scss/custom-typography.scss'
+import 'leaflet/dist/leaflet.css'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
