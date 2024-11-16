@@ -6,12 +6,15 @@ import DeleteButton from '../button/DeleteButton'
 import ConfirmDeleteModal from 'components/modals/DeleteModal'
 import DeleteModal from 'components/modals/DeleteModal'
 import noLocationImage from 'styles/images/no-location-image.png'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
+import { LocationType } from 'models/location'
 
 interface Props {
-  imageSrc: string | undefined
+  upload: LocationType
 }
 
-const MyUploadCard: FC<Props> = ({ imageSrc }) => {
+const MyUploadCard: FC<Props> = ({ upload }) => {
   const [show, setShow] = useState(false)
   const [showConfirm, setShowConfirm] = useState(false)
 
@@ -27,14 +30,17 @@ const MyUploadCard: FC<Props> = ({ imageSrc }) => {
   return (
     <Card className={styles.locationCard}>
       <Card.Img
-        src={imageSrc ? imageSrc : noLocationImage}
+        src={upload.imageUrl ? upload.imageUrl : noLocationImage}
         alt="card"
         className={styles.locationCardImageSm}
       />
       <Card.ImgOverlay>
-        <div className={styles.locationCardImageSmEditButton}>
+        <Link
+          className={styles.locationCardImageSmEditButton}
+          to={`${routes.LOCATION_PREFIX}/${upload.id}`}
+        >
           <EditButton />
-        </div>
+        </Link>
         <div
           className={styles.locationCardImageSmDeleteButton}
           onClick={handleShowDeleteModal}

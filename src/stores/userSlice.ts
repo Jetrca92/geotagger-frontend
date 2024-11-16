@@ -74,6 +74,9 @@ export const {
 } = userSlice.actions
 
 export const selectLocations = (state: RootState) => state.user.locations
+export const selectLocation = (state: RootState, id: string) => {
+  return state.user.locations.find((location) => location.id === id)
+}
 export const selectGuesses = (state: RootState) => state.user.guesses
 
 export default userSlice.reducer

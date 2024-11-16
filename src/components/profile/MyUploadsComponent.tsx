@@ -43,7 +43,7 @@ const MyUploadsComponent: FC<Props> = ({ uploads }) => {
             lg={3}
             className={styles.myBestGuessesCol}
           >
-            <MyUploadCard imageSrc={upload.imageUrl} />
+            <MyUploadCard upload={upload} />
           </Col>
         ))}
       </Row>
