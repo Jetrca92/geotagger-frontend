@@ -60,3 +60,12 @@ export const uploadLocationImage = async (
   )
   return response.data
 }
+
+export const deleteLocation = async (token: string, id: string) => {
+  const response = await apiRequestWithAuthHeaders<void, LocationType>(
+    apiMethods.DELETE,
+    `${apiRoutes.LOCATION_PREFIX}/${id}`,
+    token,
+  )
+  return response.data
+}

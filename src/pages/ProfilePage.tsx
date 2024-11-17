@@ -2,14 +2,40 @@ import AvatarNameComponent from 'components/profile/AvatarNameComponent'
 import MyBestGuessesComponent from 'components/profile/MyBestGuessesComponent'
 import MyUploadsComponent from 'components/profile/MyUploadsComponent'
 import Layout from 'components/ui/Layout'
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'stores/authSlice'
-import { selectLocations } from 'stores/userSlice'
+import { selectLocations, setLocations } from 'stores/userSlice'
 import styles from 'styles/scss/pages.module.scss'
+import * as API from 'api/Api'
+import { userStorage } from 'utils/localStorage'
+import { useNavigate } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 
 const Profile: FC = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const token = userStorage.getToken()
+
+  useEffect(() => {
+    if (!token) {
+      navigate(routes.LOGIN)
+      return
+    }
+
+    const fetchLocations = async () => {
+      try {
+        const locationsResponse = await API.getUserLocations(token)
+        dispatch(setLocations(locationsResponse))
+      } catch (error) {
+        console.error('Failed to fetch user locations:', error)
+      }
+    }
+
+    fetchLocations()
+  }, [token, dispatch, navigate])
+
   const user = useSelector(selectUser)
   const locations = useSelector(selectLocations)
 

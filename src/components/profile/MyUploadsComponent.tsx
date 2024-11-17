@@ -4,6 +4,8 @@ import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
 import { LocationType } from 'models/location'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 
 interface Props {
   uploads?: LocationType[]
@@ -24,9 +26,9 @@ const MyUploadsComponent: FC<Props> = ({ uploads }) => {
               navigation bar press the “+” button.
             </div>
           </div>
-          <div>
+          <Link to={routes.ADD_LOCATION}>
             <PrimaryButton text="Add location" />
-          </div>
+          </Link>
         </div>
       </Container>
     )

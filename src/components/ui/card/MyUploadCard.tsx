@@ -3,10 +3,10 @@ import { Card } from 'react-bootstrap'
 import styles from 'styles/scss/custom-bootstrap.module.scss'
 import EditButton from '../button/EditButton'
 import DeleteButton from '../button/DeleteButton'
-import ConfirmDeleteModal from 'components/modals/DeleteModal'
+import ConfirmDeleteModal from 'components/modals/ConfirmDeleteModal'
 import DeleteModal from 'components/modals/DeleteModal'
 import noLocationImage from 'styles/images/no-location-image.png'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import { LocationType } from 'models/location'
 
@@ -15,17 +15,17 @@ interface Props {
 }
 
 const MyUploadCard: FC<Props> = ({ upload }) => {
-  const [show, setShow] = useState(false)
-  const [showConfirm, setShowConfirm] = useState(false)
+  const navigate = useNavigate()
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
-  const handleCloseDeleteModal = () => setShow(false)
-  const handleShowDeleteModal = () => setShow(true)
-  const handleCloseConfirmDeleteModal = () => setShowConfirm(false)
-  const handleShowConfirmDeleteModal = () => setShowConfirm(true)
-
-  const onDelete = () => {
-    setShowConfirm(true)
+  const handleCloseDeleteModal = () => setShowDeleteModal(false)
+  const handleShowDeleteModal = () => setShowDeleteModal(true)
+  const handleCloseConfirmationModal = () => {
+    setShowConfirmationModal(false)
+    navigate(routes.PROFILE)
   }
+  const handleShowConfirmationModal = () => setShowConfirmationModal(true)
 
   return (
     <Card className={styles.locationCard}>
@@ -49,10 +49,15 @@ const MyUploadCard: FC<Props> = ({ upload }) => {
         </div>
       </Card.ImgOverlay>
 
-      <DeleteModal show={show} onHide={handleCloseDeleteModal} />
+      <DeleteModal
+        show={showDeleteModal}
+        locationId={upload.id}
+        onHide={handleCloseDeleteModal}
+        onDelete={handleShowConfirmationModal}
+      />
       <ConfirmDeleteModal
-        show={showConfirm}
-        onHide={handleCloseConfirmDeleteModal}
+        show={showConfirmationModal}
+        onHide={handleCloseConfirmationModal}
       />
     </Card>
   )
