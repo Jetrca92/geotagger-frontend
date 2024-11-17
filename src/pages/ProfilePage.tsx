@@ -39,6 +39,10 @@ const Profile: FC = () => {
   const user = useSelector(selectUser)
   const locations = useSelector(selectLocations)
 
+  const refreshProfilePage = () => {
+    window.location.reload()
+  }
+
   if (!user) {
     return (
       <Layout>
@@ -59,7 +63,10 @@ const Profile: FC = () => {
           lastName={user.lastName}
         />
         <MyBestGuessesComponent guesses={guess} />
-        <MyUploadsComponent uploads={locations} />
+        <MyUploadsComponent
+          uploads={locations}
+          refreshProfilePage={refreshProfilePage}
+        />
       </Container>
     </Layout>
   )

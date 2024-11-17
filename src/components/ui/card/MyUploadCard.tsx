@@ -6,16 +6,16 @@ import DeleteButton from '../button/DeleteButton'
 import ConfirmDeleteModal from 'components/modals/ConfirmDeleteModal'
 import DeleteModal from 'components/modals/DeleteModal'
 import noLocationImage from 'styles/images/no-location-image.png'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 import { LocationType } from 'models/location'
 
 interface Props {
   upload: LocationType
+  refreshProfilePage: () => void
 }
 
-const MyUploadCard: FC<Props> = ({ upload }) => {
-  const navigate = useNavigate()
+const MyUploadCard: FC<Props> = ({ upload, refreshProfilePage }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showConfirmationModal, setShowConfirmationModal] = useState(false)
 
@@ -23,7 +23,7 @@ const MyUploadCard: FC<Props> = ({ upload }) => {
   const handleShowDeleteModal = () => setShowDeleteModal(true)
   const handleCloseConfirmationModal = () => {
     setShowConfirmationModal(false)
-    navigate(routes.PROFILE)
+    refreshProfilePage()
   }
   const handleShowConfirmationModal = () => setShowConfirmationModal(true)
 

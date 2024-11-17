@@ -9,9 +9,10 @@ import { routes } from 'constants/routesConstants'
 
 interface Props {
   uploads?: LocationType[]
+  refreshProfilePage: () => void
 }
 
-const MyUploadsComponent: FC<Props> = ({ uploads }) => {
+const MyUploadsComponent: FC<Props> = ({ uploads, refreshProfilePage }) => {
   if (uploads?.length === 0 || !uploads)
     return (
       <Container className={styles.myBestGuessesContainer}>
@@ -45,7 +46,10 @@ const MyUploadsComponent: FC<Props> = ({ uploads }) => {
             lg={3}
             className={styles.myBestGuessesCol}
           >
-            <MyUploadCard upload={upload} />
+            <MyUploadCard
+              upload={upload}
+              refreshProfilePage={refreshProfilePage}
+            />
           </Col>
         ))}
       </Row>
