@@ -1,11 +1,11 @@
 import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/landing-page.module.scss'
-import cardImage from 'styles/images/landing-card3.png'
 import LocationCard from 'components/ui/card/LocationCard'
+import { LocationType } from 'models/location'
 
 interface Props {
-  locations?: number[]
+  locations?: LocationType[]
 }
 
 const NewLocations: FC<Props> = ({ locations }) => {
@@ -30,7 +30,7 @@ const NewLocations: FC<Props> = ({ locations }) => {
                   lg={4}
                   className={styles.personalBestGuessesCol}
                 >
-                  <LocationCard imageSrc={cardImage} />
+                  <LocationCard location={location} />
                 </Col>
               ))}
             </Row>
