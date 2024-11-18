@@ -2,9 +2,10 @@ import { FC } from 'react'
 import { Container } from 'react-bootstrap'
 import styles from 'styles/scss/location.module.scss'
 import LocationDetailsComponent from './LocationDetailsComponent'
+import { LocationType } from 'models/location'
 
 interface Props {
-  location: number
+  location: LocationType
 }
 
 const TakeGuessComponent: FC<Props> = ({ location }) => {

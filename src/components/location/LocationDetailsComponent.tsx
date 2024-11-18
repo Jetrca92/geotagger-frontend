@@ -1,24 +1,24 @@
 import { FC } from 'react'
 import { Container } from 'react-bootstrap'
 import styles from 'styles/scss/location.module.scss'
-import locationImage from 'styles/images/location1.png'
-import map from 'styles/images/map.png'
+import noImage from 'styles/images/no-location-image.png'
+
 import LocationGuessForm from './LocationGuessForm'
+import { LocationType } from 'models/location'
 
 interface Props {
-  location: number
+  location: LocationType
 }
 
 const LocationDetailsComponent: FC<Props> = ({ location }) => {
   return (
     <Container className={styles.locationDetailsContainer}>
       <img
-        src={locationImage}
+        src={location.imageUrl ? location.imageUrl : noImage}
         className={styles.locationImage}
         alt="location"
       />
-      <img src={map} className={styles.locationMap} alt="map" />
-      <LocationGuessForm />
+      <LocationGuessForm location={location} />
     </Container>
   )
 }

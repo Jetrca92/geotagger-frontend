@@ -37,7 +37,7 @@ const MyUploadCard: FC<Props> = ({ upload, refreshProfilePage }) => {
       <Card.ImgOverlay>
         <Link
           className={styles.locationCardImageSmEditButton}
-          to={`${routes.LOCATION_PREFIX}/${upload.id}`}
+          to={`${routes.EDIT_LOCATION_PREFIX}/${upload.id}`}
         >
           <EditButton />
         </Link>

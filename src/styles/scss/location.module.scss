@@ -56,6 +56,11 @@
   margin-bottom: 16px;
 }
 
+.locationGuessFormRow {
+  @extend .locationFormRow;
+  margin-top: 32px;
+}
+
 .locationFormLeftCol {
   width: 640px;
   padding: 0px;

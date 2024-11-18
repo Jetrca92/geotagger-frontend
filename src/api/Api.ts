@@ -73,3 +73,4 @@ export async function apiRequestWithAuthHeaders<
 export * from './Auth'
 export * from './User'
 export * from './Location'
+export * from './Guess'

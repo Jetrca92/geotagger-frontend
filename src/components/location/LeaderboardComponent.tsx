@@ -4,9 +4,10 @@ import { Container, ListGroup } from 'react-bootstrap'
 import styles from 'styles/scss/location.module.scss'
 import sampleAvatar from 'styles/images/sample-avatar.png'
 import UserRankingIcon from './UserRankingIcon'
+import { LocationType } from 'models/location'
 
 interface Props {
-  location: number
+  location: LocationType
 }
 
 const LeaderboardComponent: FC<Props> = ({ location }) => {

@@ -3,6 +3,8 @@ import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/landing-page.module.scss'
 import LocationCard from 'components/ui/card/LocationCard'
 import { LocationType } from 'models/location'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 
 interface Props {
   locations?: LocationType[]
@@ -30,7 +32,9 @@ const NewLocations: FC<Props> = ({ locations }) => {
                   lg={4}
                   className={styles.personalBestGuessesCol}
                 >
-                  <LocationCard location={location} />
+                  <Link to={`${routes.LOCATION_PREFIX}/${location.id}`}>
+                    <LocationCard location={location} />
+                  </Link>
                 </Col>
               ))}
             </Row>

@@ -10,7 +10,7 @@ import { RootState } from 'stores/store'
 import { userStorage } from 'utils/localStorage'
 import { routes } from 'constants/routesConstants'
 
-const AddLocationPage: FC = () => {
+const EditLocationPage: FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const location = useSelector((state: RootState) => selectLocation(state, id!))
@@ -48,4 +48,4 @@ const AddLocationPage: FC = () => {
   )
 }
 
-export default AddLocationPage
+export default EditLocationPage

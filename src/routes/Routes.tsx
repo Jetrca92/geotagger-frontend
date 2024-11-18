@@ -21,6 +21,7 @@ const Landing = lazy(() => import('pages/LandingPage'))
 const Profile = lazy(() => import('pages/ProfilePage'))
 const AddLocation = lazy(() => import('pages/AddLocationPage'))
 const EditLocation = lazy(() => import('pages/EditLocationPage'))
+const GuessLocation = lazy(() => import('pages/LocationGuess'))
 
 /* Restricted routes */
 const Login = lazy(() => import('pages/LoginPage'))
@@ -66,8 +67,13 @@ export const AppRoutes: AppRoute[] = [
   },
   {
     type: RouteType.PRIVATE,
-    path: `${routes.LOCATION_PREFIX}/:id`,
+    path: `${routes.EDIT_LOCATION_PREFIX}/:id`,
     children: <EditLocation />,
+  },
+  {
+    type: RouteType.PRIVATE,
+    path: `${routes.LOCATION_PREFIX}/:id`,
+    children: <GuessLocation />,
   },
 ]
 
