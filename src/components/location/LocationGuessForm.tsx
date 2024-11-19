@@ -16,6 +16,7 @@ import { userStorage } from 'utils/localStorage'
 import { ErrorType } from 'constants/errorConstants'
 import * as API from 'api/Api'
 import { setGuesses } from 'stores/userSlice'
+import { errorDistanceString } from 'utils/helpers'
 
 interface Props {
   location: LocationType
@@ -67,8 +68,8 @@ const LocationGuessForm: FC<Props> = ({ location }) => {
         dispatch(setError({ type: ErrorType.API, message: response.message }))
         return
       }
-
-      setErrorDistance(response.errorDistance)
+      const errorDistance = errorDistanceString(response.errorDistance)
+      setErrorDistance(errorDistance)
       setGuessedLocation(response.address)
       const guessResponse = await API.getUserLocations(token)
       dispatch(setGuesses(guessResponse))

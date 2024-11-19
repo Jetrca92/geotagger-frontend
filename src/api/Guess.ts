@@ -14,3 +14,12 @@ export const addGuess = async (
   >(apiMethods.POST, `${apiRoutes.GUESS_LOCATION_PREFIX}/${id}`, token, data)
   return response.data
 }
+
+export const getGuesses = async (token: string, id: string) => {
+  const response = await apiRequestWithAuthHeaders<void, LocationType[]>(
+    apiMethods.GET,
+    `${apiRoutes.GUESS_LOCATION_PREFIX}/${id}`,
+    token,
+  )
+  return response.data
+}

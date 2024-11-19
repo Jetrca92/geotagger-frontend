@@ -4,33 +4,56 @@ import { Container, ListGroup } from 'react-bootstrap'
 import styles from 'styles/scss/location.module.scss'
 import sampleAvatar from 'styles/images/sample-avatar.png'
 import UserRankingIcon from './UserRankingIcon'
-import { LocationType } from 'models/location'
+import { GuessType } from 'models/guess'
+import { errorDistanceString, formatDate } from 'utils/helpers'
 
 interface Props {
-  location: LocationType
+  guesses: GuessType[]
 }
 
-const LeaderboardComponent: FC<Props> = ({ location }) => {
+const LeaderboardComponent: FC<Props> = ({ guesses }) => {
+  if (guesses.length === 0)
+    return (
+      <Container className={styles.leaderboardContainer}>
+        <h4 className={styles.takeGuessTitle}>Leaderboard</h4>
+        No guesses.
+      </Container>
+    )
+
   return (
     <Container className={styles.leaderboardContainer}>
       <h4 className={styles.takeGuessTitle}>Leaderboard</h4>
       <ListGroup className={styles.leaderboardList}>
-        <ListGroup.Item className={styles.leaderboardListItem}>
-          <div className={styles.leaderboardUserDetailsDiv}>
-            <UserRankingIcon ranking={4} />
+        {guesses.map((guess, index) => (
+          <ListGroup.Item className={styles.leaderboardListItem} key={index}>
+            <div className={styles.leaderboardUserDetailsDiv}>
+              <UserRankingIcon ranking={index + 1} />
 
-            <div className={styles.leaderboardUserDetails}>
-              <div className={styles.leaderboardUserAvatar}>
-                <UserAvatar avatarSrc={sampleAvatar} />
-              </div>
-              <div className={styles.userNameSurnameDate}>
-                <div className={styles.userNameSurname}>Elanor Pera</div>
-                <div className={styles.userGuessDate}>23. 4. 2021</div>
+              <div className={styles.leaderboardUserDetails}>
+                <div className={styles.leaderboardUserAvatar}>
+                  <UserAvatar
+                    avatarSrc={
+                      guess.owner.avatarUrl
+                        ? guess.owner.avatarUrl
+                        : sampleAvatar
+                    }
+                  />
+                </div>
+                <div className={styles.userNameSurnameDate}>
+                  <div
+                    className={styles.userNameSurname}
+                  >{`${guess.owner.firstName} ${guess.owner.lastName}`}</div>
+                  <div className={styles.userGuessDate}>
+                    {formatDate(guess.createdAt)}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div className={styles.guessDistance}>6 m</div>
-        </ListGroup.Item>
+            <div className={styles.guessDistance}>
+              {errorDistanceString(guess.errorDistance)}
+            </div>
+          </ListGroup.Item>
+        ))}
       </ListGroup>
     </Container>
   )
