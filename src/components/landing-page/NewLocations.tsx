@@ -5,6 +5,7 @@ import LocationCard from 'components/ui/card/LocationCard'
 import { LocationType } from 'models/location'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
+import emptyImage from 'styles/images/no-location-image.png'
 
 interface Props {
   locations?: LocationType[]
@@ -33,7 +34,9 @@ const NewLocations: FC<Props> = ({ locations }) => {
                   className={styles.personalBestGuessesCol}
                 >
                   <Link to={`${routes.LOCATION_PREFIX}/${location.id}`}>
-                    <LocationCard location={location} />
+                    <LocationCard
+                      landingImage={location.imageUrl || emptyImage}
+                    />
                   </Link>
                 </Col>
               ))}

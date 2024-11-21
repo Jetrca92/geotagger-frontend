@@ -5,29 +5,22 @@ import PrimaryButton from 'components/ui/button/PrimaryButton'
 import LocationCard from 'components/ui/card/LocationCard'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
-import { LocationType } from 'models/location'
+import image1 from 'styles/images/landing-card3.png'
+import image2 from 'styles/images/landing-card2.png'
+import image3 from 'styles/images/landing-card1.png'
 
 const LandingCards: FC = () => {
-  const location: LocationType = {
-    id: '12',
-    latitude: 123,
-    longitude: 123,
-    imageUrl: '124l.jpg',
-    address: 'address',
-    ownerId: '123',
-  }
-
   return (
     <Container fluid className={styles.landingCards}>
       <Row className={styles.landingCardsRow}>
         <Col xs={12} sm={6} md={4} className={styles.landingCardsCol}>
-          <LocationCard location={location} locked={true} />
+          <LocationCard landingImage={image1} locked={true} />
         </Col>
         <Col xs={12} sm={6} md={4} className={styles.landingCardsCol}>
-          <LocationCard location={location} locked={true} />
+          <LocationCard landingImage={image2} locked={true} />
         </Col>
         <Col xs={12} sm={6} md={4} className={styles.landingCardsCol}>
-          <LocationCard location={location} locked={true} />
+          <LocationCard landingImage={image3} locked={true} />
         </Col>
       </Row>
       <Container className={styles.landingCardsButtonContainer}>

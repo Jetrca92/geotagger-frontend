@@ -11,6 +11,13 @@ export const getLocations = async () => {
   return response.data
 }
 
+export const getLocationById = async (id: string) => {
+  const response = await apiRequest<void, LocationType>(
+    apiMethods.GET,
+    `${apiRoutes.LOCATION_BY_ID_PREFIX}/${id}`,
+  )
+  return response.data
+}
 export const getRandomLocation = async () => {
   const response = await apiRequest<void, LocationType>(
     apiMethods.GET,
@@ -38,12 +45,13 @@ export const addLocation = async (token: string, data: AddLocationFields) => {
 
 export const updateLocation = async (
   token: string,
+  id: string,
   data: AddLocationFields,
 ) => {
   const response = await apiRequestWithAuthHeaders<
     AddLocationFields,
     LocationType
-  >(apiMethods.PATCH, apiRoutes.LOCATION_PREFIX, token, data)
+  >(apiMethods.PATCH, `${apiRoutes.LOCATION_BY_ID_PREFIX}/${id}`, token, data)
   return response.data
 }
 
@@ -64,7 +72,7 @@ export const uploadLocationImage = async (
 export const deleteLocation = async (token: string, id: string) => {
   const response = await apiRequestWithAuthHeaders<void, LocationType>(
     apiMethods.DELETE,
-    `${apiRoutes.LOCATION_PREFIX}/${id}`,
+    `${apiRoutes.LOCATION_BY_ID_PREFIX}/${id}`,
     token,
   )
   return response.data

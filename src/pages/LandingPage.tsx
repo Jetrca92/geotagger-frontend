@@ -11,11 +11,12 @@ import { selectUser } from 'stores/authSlice'
 import styles from 'styles/scss/pages.module.scss'
 import * as API from 'api/Api'
 import { selectAllLocations, setAllLocations } from 'stores/locationsSlice'
+import { selectGuesses } from 'stores/userSlice'
 
 const LandingPage: FC = () => {
   const dispatch = useDispatch()
   const user = useSelector(selectUser)
-  const guesses = [1, 5, 12]
+  const guesses = useSelector(selectGuesses)
 
   useEffect(() => {
     const fetchLocations = async () => {

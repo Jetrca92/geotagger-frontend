@@ -11,7 +11,7 @@ import { clearAllErrors, setError } from 'stores/errorSlice'
 import { RootState } from 'stores/store'
 import { routes } from 'constants/routesConstants'
 import { ErrorType } from 'constants/errorConstants'
-import { setLocations } from 'stores/userSlice'
+import { setGuesses, setLocations } from 'stores/userSlice'
 
 const LoginForm: FC = () => {
   const dispatch = useDispatch()
@@ -39,8 +39,10 @@ const LoginForm: FC = () => {
       const userLocations = await API.getUserLocations(
         response.data.access_token,
       )
+      const userGuesses = await API.getUserGuesses(response.data.access_token)
       dispatch(login({ user, token: response.data.access_token }))
       dispatch(setLocations(userLocations))
+      dispatch(setGuesses(userGuesses))
       navigate('/')
     } catch (error) {
       dispatch(

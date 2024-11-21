@@ -14,7 +14,10 @@ export enum apiRoutes {
   LOCATION_PREFIX = '/location',
   RANDOM_LOCATION = '/location/random,',
   UPLOAD_LOCATION_IMAGE_PREFIX = '/location/upload',
+  LOCATION_BY_ID_PREFIX = 'location/location',
+  // Guess
   GUESS_LOCATION_PREFIX = '/location/guess',
+  USER_GUESSES = 'location/guess/user-guesses',
 }
 
 export enum apiMethods {

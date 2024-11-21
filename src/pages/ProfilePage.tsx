@@ -6,7 +6,7 @@ import { FC, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'stores/authSlice'
-import { selectLocations, setLocations } from 'stores/userSlice'
+import { selectGuesses, selectLocations, setLocations } from 'stores/userSlice'
 import styles from 'styles/scss/pages.module.scss'
 import * as API from 'api/Api'
 import { userStorage } from 'utils/localStorage'
@@ -38,6 +38,7 @@ const Profile: FC = () => {
 
   const user = useSelector(selectUser)
   const locations = useSelector(selectLocations)
+  const guesses = useSelector(selectGuesses)
 
   const refreshProfilePage = () => {
     window.location.reload()
@@ -52,7 +53,6 @@ const Profile: FC = () => {
       </Layout>
     )
   }
-  const guess = [258, 155, 157, 100]
 
   return (
     <Layout>
@@ -62,7 +62,7 @@ const Profile: FC = () => {
           firstName={user.firstName}
           lastName={user.lastName}
         />
-        <MyBestGuessesComponent guesses={guess} />
+        <MyBestGuessesComponent guesses={guesses} />
         <MyUploadsComponent
           uploads={locations}
           refreshProfilePage={refreshProfilePage}

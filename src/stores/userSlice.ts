@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from './store'
+import { GuessOwnerType } from 'models/guess'
 
 interface LocationType {
   id: string
@@ -12,9 +13,12 @@ interface LocationType {
 
 interface GuessType {
   id: string
+  createdAt: string
   guessedLatitude: number
   guessedLongitude: number
+  address: string
   errorDistance: number
+  owner: GuessOwnerType
   locationId: string
 }
 

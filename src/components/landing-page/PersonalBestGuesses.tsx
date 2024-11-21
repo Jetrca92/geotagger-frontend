@@ -2,22 +2,13 @@ import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/landing-page.module.scss'
 import LocationCard from 'components/ui/card/LocationCard'
-import { LocationType } from 'models/location'
+import { GuessType } from 'models/guess'
 
 interface Props {
-  guesses?: number[]
+  guesses?: GuessType[]
 }
 
 const PersonalBestGuesses: FC<Props> = ({ guesses }) => {
-  const location: LocationType = {
-    id: '12',
-    latitude: 123,
-    longitude: 123,
-    imageUrl: '124l.jpg',
-    address: 'address',
-    ownerId: '123',
-  }
-
   return (
     <Container className={styles.personalBestGuessesContainer}>
       <Container className={styles.personalBestGuessesTitleCard}>
@@ -41,7 +32,7 @@ const PersonalBestGuesses: FC<Props> = ({ guesses }) => {
                   lg={4}
                   className={styles.personalBestGuessesCol}
                 >
-                  <LocationCard guess={guess} location={location} />
+                  <LocationCard guess={guess} />
                 </Col>
               ))}
             </Row>

@@ -2,11 +2,13 @@ import PrimaryButton from 'components/ui/button/PrimaryButton'
 import { FC } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
-import cardImage from 'styles/images/landing-card1.png'
 import BestGuessCard from 'components/ui/card/BestGuessCard'
+import { GuessType } from 'models/guess'
+import { Link } from 'react-router-dom'
+import { routes } from 'constants/routesConstants'
 
 interface Props {
-  guesses?: number[]
+  guesses?: GuessType[]
 }
 
 const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
@@ -24,12 +26,13 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
               results here!
             </div>
           </div>
-          <div>
+          <Link to={routes.HOME}>
             <PrimaryButton text="Go to locations" />
-          </div>
+          </Link>
         </div>
       </Container>
     )
+
   return (
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My best guesses</h5>
@@ -42,7 +45,7 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
             lg={3}
             className={styles.myBestGuessesCol}
           >
-            <BestGuessCard guess={guess} imageSrc={cardImage} />
+            <BestGuessCard guess={guess} />
           </Col>
         ))}
       </Row>
