@@ -13,11 +13,13 @@ interface Props {
 const LocationDetailsComponent: FC<Props> = ({ location }) => {
   return (
     <Container className={styles.locationDetailsContainer}>
-      <img
-        src={location.imageUrl ? location.imageUrl : noImage}
-        className={styles.locationImage}
-        alt="location"
-      />
+      <div className={styles.locationImageDiv}>
+        <img
+          src={location.imageUrl || noImage}
+          className={styles.locationImage}
+          alt="location"
+        />
+      </div>
       <LocationGuessForm location={location} />
     </Container>
   )
