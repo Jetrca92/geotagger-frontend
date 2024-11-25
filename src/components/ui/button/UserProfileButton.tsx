@@ -15,7 +15,7 @@ const UserProfileButton: FC<UserProfileButtonProps> = ({
   return (
     <Button
       className={
-        points
+        points > 0
           ? styles.customUserProfileButtonWithPoints
           : styles.customUserProfileButton
       }
