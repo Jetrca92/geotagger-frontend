@@ -17,12 +17,15 @@ import { ErrorType } from 'constants/errorConstants'
 import * as API from 'api/Api'
 import { setGuesses } from 'stores/userSlice'
 import { errorDistanceString } from 'utils/helpers'
+import { updateUser } from 'stores/authSlice'
+import { GuessType } from 'models/guess'
 
 interface Props {
   location: LocationType
+  onNewGuess: (guess: GuessType) => void
 }
 
-const LocationGuessForm: FC<Props> = ({ location }) => {
+const LocationGuessForm: FC<Props> = ({ location, onNewGuess }) => {
   setupLeafletDefaultIcon()
   const dispatch = useDispatch()
   const { handleSubmit, control, setValue } = useAddLocationForm()
@@ -68,11 +71,16 @@ const LocationGuessForm: FC<Props> = ({ location }) => {
         dispatch(setError({ type: ErrorType.API, message: response.message }))
         return
       }
+      onNewGuess(response)
       const errorDistance = errorDistanceString(response.errorDistance)
       setErrorDistance(errorDistance)
       setGuessedLocation(response.address)
+
       const guessResponse = await API.getUserLocations(token)
       dispatch(setGuesses(guessResponse))
+
+      const userResponse = await API.fetchUser(token)
+      dispatch(updateUser({ user: userResponse }))
     } catch (error) {
       dispatch(
         setError({

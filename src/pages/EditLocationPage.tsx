@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap'
 import EditLocationForm from 'components/location/EditLocationForm'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { selectLocation } from 'stores/userSlice'
+import { selectUserLocation } from 'stores/userSlice'
 import { RootState } from 'stores/store'
 import { userStorage } from 'utils/localStorage'
 import { routes } from 'constants/routesConstants'
@@ -13,7 +13,9 @@ import { routes } from 'constants/routesConstants'
 const EditLocationPage: FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
-  const location = useSelector((state: RootState) => selectLocation(state, id!))
+  const location = useSelector((state: RootState) =>
+    selectUserLocation(state, id!),
+  )
   if (!location)
     return (
       <Layout>

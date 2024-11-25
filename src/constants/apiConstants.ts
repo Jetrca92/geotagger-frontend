@@ -12,6 +12,7 @@ export enum apiRoutes {
   UPDATE_PASSWORD = '/user/update-password',
   // Location
   LOCATION_PREFIX = '/location',
+  FETCH_USER_LOCATIONS = '/location/user-locations',
   RANDOM_LOCATION = '/location/random,',
   UPLOAD_LOCATION_IMAGE_PREFIX = '/location/upload',
   LOCATION_BY_ID_PREFIX = 'location/location',

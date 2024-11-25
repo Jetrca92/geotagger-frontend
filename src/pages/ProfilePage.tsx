@@ -6,7 +6,11 @@ import { FC, useEffect } from 'react'
 import { Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectUser } from 'stores/authSlice'
-import { selectGuesses, selectLocations, setLocations } from 'stores/userSlice'
+import {
+  selectUserGuesses,
+  selectUserLocations,
+  setLocations,
+} from 'stores/userSlice'
 import styles from 'styles/scss/pages.module.scss'
 import * as API from 'api/Api'
 import { userStorage } from 'utils/localStorage'
@@ -37,8 +41,8 @@ const Profile: FC = () => {
   }, [token, dispatch, navigate])
 
   const user = useSelector(selectUser)
-  const locations = useSelector(selectLocations)
-  const guesses = useSelector(selectGuesses)
+  const locations = useSelector(selectUserLocations)
+  const guesses = useSelector(selectUserGuesses)
 
   const refreshProfilePage = () => {
     window.location.reload()

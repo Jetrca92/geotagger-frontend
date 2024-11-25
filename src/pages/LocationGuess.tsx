@@ -7,16 +7,17 @@ import LeaderboardComponent from 'components/location/LeaderboardComponent'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from 'stores/store'
-import { selectLocation } from 'stores/userSlice'
+import { selectLocation } from 'stores/locationsSlice'
 import { userStorage } from 'utils/localStorage'
 import { routes } from 'constants/routesConstants'
 import * as API from 'api/Api'
+import { GuessType } from 'models/guess'
 
 const LocationPage: FC = () => {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>()
   const location = useSelector((state: RootState) => selectLocation(state, id!))
-  const [guesses, setGuesses] = useState([])
+  const [guesses, setGuesses] = useState<GuessType[]>([])
   const token = userStorage.getToken()
 
   useEffect(() => {
@@ -40,6 +41,14 @@ const LocationPage: FC = () => {
     fetchGuesses()
   }, [id, token])
 
+  const handleNewGuess = (newGuess: GuessType) => {
+    setGuesses((prevGuesses) =>
+      [...prevGuesses, newGuess].sort(
+        (a, b) => a.errorDistance - b.errorDistance,
+      ),
+    )
+  }
+
   if (!location)
     return (
       <Layout>
@@ -52,7 +61,7 @@ const LocationPage: FC = () => {
   return (
     <Layout>
       <Container className={styles.locationPage}>
-        <TakeGuessComponent location={location} />
+        <TakeGuessComponent location={location} onNewGuess={handleNewGuess} />
         <LeaderboardComponent guesses={guesses} />
       </Container>
     </Layout>

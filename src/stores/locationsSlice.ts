@@ -21,6 +21,11 @@ const locationsSlice = createSlice({
 })
 
 export const { setAllLocations } = locationsSlice.actions
+
 export const selectAllLocations = (state: RootState) =>
   state.locations.locations
+export const selectLocation = (state: RootState, id: string) => {
+  return state.locations.locations.find((location) => location.id === id)
+}
+
 export default locationsSlice.reducer
