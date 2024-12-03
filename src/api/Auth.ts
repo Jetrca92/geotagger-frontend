@@ -8,3 +8,9 @@ export const login = async (data: LoginUserFields) =>
 
 export const signup = async (data: ApiRegisterUser) =>
   apiRequest<ApiRegisterUser, void>(apiMethods.POST, apiRoutes.SIGNUP, data)
+
+export const getGoogleUser = async (token: string) =>
+  apiRequest<void, { user: any }>(
+    apiMethods.GET,
+    `${apiRoutes.GOOGLE_LOGIN}?token=${token}`,
+  )

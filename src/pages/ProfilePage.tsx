@@ -14,14 +14,29 @@ import {
 import styles from 'styles/scss/pages.module.scss'
 import * as API from 'api/Api'
 import { userStorage } from 'utils/localStorage'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
 
 const Profile: FC = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const token = userStorage.getToken()
+  const location = useLocation()
 
+  // Get token if google redirect
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search)
+    const token = queryParams.get('token')
+
+    if (token) {
+      userStorage.setToken(token)
+      navigate(routes.PROFILE)
+    } else if (!userStorage.getToken()) {
+      navigate(routes.LOGIN)
+    }
+  }, [location, navigate])
+
+  // Get locations if authenticated
+  const token = userStorage.getToken()
   useEffect(() => {
     if (!token) {
       navigate(routes.LOGIN)

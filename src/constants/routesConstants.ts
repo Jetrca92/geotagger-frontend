@@ -7,4 +7,5 @@ export enum routes {
   LOCATION_PREFIX = '/location',
   EDIT_LOCATION_PREFIX = '/location/edit',
   ADD_LOCATION = '/location/add',
+  DASHBOARD = '/dashboard',
 }
