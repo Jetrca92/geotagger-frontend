@@ -1,18 +1,25 @@
 import PrimaryButton from 'components/ui/button/PrimaryButton'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
 import BestGuessCard from 'components/ui/card/BestGuessCard'
 import { GuessType } from 'models/guess'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
+import SecondaryButton from 'components/ui/button/SecondaryButton'
 
 interface Props {
   guesses?: GuessType[]
 }
 
-const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
-  if (guesses?.length === 0 || !guesses)
+const MyBestGuessesComponent: FC<Props> = ({ guesses = [] }) => {
+  const [visibleCount, setVisibleCount] = useState(4)
+
+  const loadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 4)
+  }
+
+  if (guesses?.length === 0)
     return (
       <Container className={styles.myBestGuessesContainer}>
         <h5 className={styles.myBestGuessesTitle}>My best guesses</h5>
@@ -37,7 +44,7 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My best guesses</h5>
       <Row className={styles.myBestGuessesRow}>
-        {guesses.map((guess, index) => (
+        {guesses.slice(0, visibleCount).map((guess, index) => (
           <Col
             key={index}
             sm={12}
@@ -49,6 +56,11 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses }) => {
           </Col>
         ))}
       </Row>
+      {visibleCount < guesses.length && (
+        <div className={styles.loadMoreBtnDiv} onClick={loadMore}>
+          <SecondaryButton text="Load more" />
+        </div>
+      )}
     </Container>
   )
 }

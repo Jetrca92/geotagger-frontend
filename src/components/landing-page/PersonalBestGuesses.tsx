@@ -1,14 +1,21 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/landing-page.module.scss'
 import LocationCard from 'components/ui/card/LocationCard'
 import { GuessType } from 'models/guess'
+import SecondaryButton from 'components/ui/button/SecondaryButton'
 
 interface Props {
   guesses?: GuessType[]
 }
 
-const PersonalBestGuesses: FC<Props> = ({ guesses }) => {
+const PersonalBestGuesses: FC<Props> = ({ guesses = [] }) => {
+  const [visibleCount, setVisibleCount] = useState(3)
+
+  const loadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 3)
+  }
+
   return (
     <Container className={styles.personalBestGuessesContainer}>
       <Container className={styles.personalBestGuessesTitleCard}>
@@ -21,10 +28,10 @@ const PersonalBestGuesses: FC<Props> = ({ guesses }) => {
             personal records or set a new one!
           </div>
         </div>
-        {guesses && guesses.length !== 0 ? (
+        {guesses.length > 0 ? (
           <Container fluid className={styles.bestGuessesContainer}>
             <Row className={styles.personalBestGuessesRow}>
-              {guesses.map((guess, index) => (
+              {guesses.slice(0, visibleCount).map((guess, index) => (
                 <Col
                   key={index}
                   sm={12}
@@ -36,6 +43,11 @@ const PersonalBestGuesses: FC<Props> = ({ guesses }) => {
                 </Col>
               ))}
             </Row>
+            {visibleCount < guesses.length && (
+              <div className={styles.loadMoreBtnDiv} onClick={loadMore}>
+                <SecondaryButton text="Load more" />
+              </div>
+            )}
           </Container>
         ) : (
           <></>

@@ -1,19 +1,29 @@
 import PrimaryButton from 'components/ui/button/PrimaryButton'
 import MyUploadCard from 'components/ui/card/MyUploadCard'
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import styles from 'styles/scss/profile.module.scss'
 import { LocationType } from 'models/location'
 import { Link } from 'react-router-dom'
 import { routes } from 'constants/routesConstants'
+import SecondaryButton from 'components/ui/button/SecondaryButton'
 
 interface Props {
   uploads?: LocationType[]
   refreshProfilePage: () => void
 }
 
-const MyUploadsComponent: FC<Props> = ({ uploads, refreshProfilePage }) => {
-  if (uploads?.length === 0 || !uploads)
+const MyUploadsComponent: FC<Props> = ({
+  uploads = [],
+  refreshProfilePage,
+}) => {
+  const [visibleCount, setVisibleCount] = useState(4)
+
+  const loadMore = () => {
+    setVisibleCount((prevCount) => prevCount + 4)
+  }
+
+  if (uploads?.length === 0)
     return (
       <Container className={styles.myBestGuessesContainer}>
         <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
@@ -38,7 +48,7 @@ const MyUploadsComponent: FC<Props> = ({ uploads, refreshProfilePage }) => {
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
       <Row className={styles.myBestGuessesRow}>
-        {uploads.map((upload, index) => (
+        {uploads.slice(0, visibleCount).map((upload, index) => (
           <Col
             key={index}
             sm={12}
@@ -53,6 +63,11 @@ const MyUploadsComponent: FC<Props> = ({ uploads, refreshProfilePage }) => {
           </Col>
         ))}
       </Row>
+      {visibleCount < uploads.length && (
+        <div className={styles.loadMoreBtnDiv} onClick={loadMore}>
+          <SecondaryButton text="Load more" />
+        </div>
+      )}
     </Container>
   )
 }
