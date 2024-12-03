@@ -12,6 +12,7 @@ import { RootState } from 'stores/store'
 import { routes } from 'constants/routesConstants'
 import { ErrorType } from 'constants/errorConstants'
 import { setGuesses, setLocations } from 'stores/userSlice'
+import GoogleSigninButton from 'components/ui/button/GoogleSigninButton'
 
 const LoginForm: FC = () => {
   const dispatch = useDispatch()
@@ -108,6 +109,7 @@ const LoginForm: FC = () => {
         <Button className={styles.formButton} type="submit">
           Sign in
         </Button>
+        <GoogleSigninButton text="Sign in with Google" />
         {showApiError && (
           <Form.Text className={styles.formErrorText}>{apiError}</Form.Text>
         )}
