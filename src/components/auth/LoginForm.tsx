@@ -121,6 +121,17 @@ const LoginForm: FC = () => {
             Sign up
           </Link>
         </div>
+        <div className={styles.createAccountText}>
+          <div className={styles.createAccountTextLeft}>
+            Forgot your password?
+          </div>
+          <Link
+            to={routes.FORGOT_PASSWORD}
+            className={styles.createAccountTextRight}
+          >
+            Reset password
+          </Link>
+        </div>
       </Form>
     </Container>
   )

@@ -3,6 +3,7 @@ export enum routes {
   SIGNUP = '/register',
   HOME = '/',
   FORGOT_PASSWORD = '/forgot-password',
+  RESET_PASSWORD = '/reset-password',
   PROFILE = '/profile',
   LOCATION_PREFIX = '/location',
   EDIT_LOCATION_PREFIX = '/location/edit',

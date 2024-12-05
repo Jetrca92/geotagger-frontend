@@ -5,6 +5,7 @@ export enum apiRoutes {
   GOOGLE_LOGIN = '/auth/google/login',
   GOOGLE_CALLBACK = '/auth/google/callback',
   FORGOT_PASSWORD = '/auth/forgot-password',
+  RESET_PASSWORD = 'auth/reset-password',
   // User
   FETCH_USER = '/user',
   UPLOAD_USER_IMAGE_PREFIX = '/user/upload',

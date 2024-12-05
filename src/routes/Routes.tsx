@@ -18,6 +18,7 @@ type AppRoute = RouteProps & {
 const Landing = lazy(() => import('pages/LandingPage'))
 const Dashboard = lazy(() => import('pages/Dashboard'))
 const ForgotPassword = lazy(() => import('pages/ForgotPasswordPage'))
+const ResetPassword = lazy(() => import('pages/ResetPasswordPage'))
 
 /* Private routes */
 const Profile = lazy(() => import('pages/ProfilePage'))
@@ -54,6 +55,11 @@ export const AppRoutes: AppRoute[] = [
     type: RouteType.PUBLIC,
     path: routes.FORGOT_PASSWORD,
     children: <ForgotPassword />,
+  },
+  {
+    type: RouteType.PUBLIC,
+    path: routes.RESET_PASSWORD,
+    children: <ResetPassword />,
   },
   {
     type: RouteType.PUBLIC,
