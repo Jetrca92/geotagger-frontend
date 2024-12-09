@@ -20,6 +20,8 @@ export enum apiRoutes {
   // Guess
   GUESS_LOCATION_PREFIX = '/location/guess',
   USER_GUESSES = 'location/guess/user-guesses',
+  // Log
+  LOG_PREFIX = '/log',
 }
 
 export enum apiMethods {
