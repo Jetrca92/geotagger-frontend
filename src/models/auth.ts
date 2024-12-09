@@ -11,4 +11,5 @@ export type UserType = {
   guesses?: {
     id: string
   }
+  isAdmin: boolean
 }

@@ -64,7 +64,7 @@ const NavbarComponent: FC = () => {
               className="justify-content-end align-items-center"
             >
               <Nav className={styles.navbarUserLinks}>
-                <Link to="/" className={styles.link}>
+                <Link to={routes.HOME} className={styles.link}>
                   Home
                 </Link>
                 <div
@@ -73,7 +73,12 @@ const NavbarComponent: FC = () => {
                 >
                   Profile settings
                 </div>
-                <Link to="/" className={styles.link} onClick={logout}>
+                {user.isAdmin && (
+                  <Link to={routes.LOGS} className={styles.link}>
+                    Logs
+                  </Link>
+                )}
+                <Link to={routes.HOME} className={styles.link} onClick={logout}>
                   Logout
                 </Link>
                 <div className={styles.navbarUserButtonsContainer}>
