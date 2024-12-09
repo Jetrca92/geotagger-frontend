@@ -46,12 +46,33 @@ const LocationGuessForm: FC<Props> = ({ location, onNewGuess }) => {
 
   const LocationSelector = () => {
     useMapEvents({
-      click: (e) => {
+      click: async (e) => {
         const { lat, lng } = e.latlng
         setSelectedPosition([lat, lng])
         setValue('latitude', lat.toFixed(5))
         setValue('longitude', lng.toFixed(5))
-        setValue('address', `${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+
+        try {
+          const response = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`,
+          )
+
+          if (response.ok) {
+            const data = await response.json()
+            const address =
+              data.display_name || `${lat.toFixed(5)}, ${lng.toFixed(5)}`
+            setValue('address', address)
+            setGuessedLocation(address)
+          } else {
+            console.error('Failed to fetch address')
+            setValue('address', `${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+            setGuessedLocation(`${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+          }
+        } catch (error) {
+          console.error('Error during reverse geocoding:', error)
+          setValue('address', `${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+          setGuessedLocation(`${lat.toFixed(5)}, ${lng.toFixed(5)}`)
+        }
       },
     })
     return selectedPosition ? <Marker position={selectedPosition} /> : null
@@ -76,7 +97,7 @@ const LocationGuessForm: FC<Props> = ({ location, onNewGuess }) => {
       setErrorDistance(errorDistance)
       setGuessedLocation(response.address)
 
-      const guessResponse = await API.getUserLocations(token)
+      const guessResponse = await API.getUserGuesses(token)
       dispatch(setGuesses(guessResponse))
 
       const userResponse = await API.fetchUser(token)
