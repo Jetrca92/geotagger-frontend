@@ -48,9 +48,9 @@ const MyUploadsComponent: FC<Props> = ({
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My uploads</h5>
       <Row className={styles.myBestGuessesRow}>
-        {uploads.slice(0, visibleCount).map((upload, index) => (
+        {uploads.slice(0, visibleCount).map((upload) => (
           <Col
-            key={index}
+            key={upload.id}
             sm={12}
             md={6}
             lg={3}

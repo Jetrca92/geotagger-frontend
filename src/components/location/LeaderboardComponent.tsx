@@ -25,7 +25,7 @@ const LeaderboardComponent: FC<Props> = ({ guesses }) => {
       <h4 className={styles.takeGuessTitle}>Leaderboard</h4>
       <ListGroup className={styles.leaderboardList}>
         {guesses.map((guess, index) => (
-          <ListGroup.Item className={styles.leaderboardListItem} key={index}>
+          <ListGroup.Item className={styles.leaderboardListItem} key={guess.id}>
             <div className={styles.leaderboardUserDetailsDiv}>
               <UserRankingIcon ranking={index + 1} />
 

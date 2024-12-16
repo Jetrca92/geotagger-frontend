@@ -44,9 +44,9 @@ const MyBestGuessesComponent: FC<Props> = ({ guesses = [] }) => {
     <Container className={styles.myBestGuessesContainer}>
       <h5 className={styles.myBestGuessesTitle}>My best guesses</h5>
       <Row className={styles.myBestGuessesRow}>
-        {guesses.slice(0, visibleCount).map((guess, index) => (
+        {guesses.slice(0, visibleCount).map((guess) => (
           <Col
-            key={index}
+            key={guess.id}
             sm={12}
             md={6}
             lg={3}

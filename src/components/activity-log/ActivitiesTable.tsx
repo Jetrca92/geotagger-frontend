@@ -37,8 +37,8 @@ const ActivitiesTable: FC<Props> = ({ activities = [] }) => {
         </thead>
         {activities.length > 0 && (
           <tbody>
-            {activities.map((activity, index) => (
-              <tr className={styles.locationTableBodyRow} key={index}>
+            {activities.map((activity) => (
+              <tr className={styles.locationTableBodyRow} key={activity.id}>
                 <td className={styles.userTableBody}>
                   <div className={styles.userTableBodyFlex}>
                     <div className={styles.userAvatar}>

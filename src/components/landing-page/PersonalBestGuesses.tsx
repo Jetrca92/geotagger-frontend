@@ -31,9 +31,9 @@ const PersonalBestGuesses: FC<Props> = ({ guesses = [] }) => {
         {guesses.length > 0 ? (
           <Container fluid className={styles.bestGuessesContainer}>
             <Row className={styles.personalBestGuessesRow}>
-              {guesses.slice(0, visibleCount).map((guess, index) => (
+              {guesses.slice(0, visibleCount).map((guess) => (
                 <Col
-                  key={index}
+                  key={guess.id}
                   sm={12}
                   md={6}
                   lg={4}

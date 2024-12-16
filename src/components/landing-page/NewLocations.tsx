@@ -32,9 +32,9 @@ const NewLocations: FC<Props> = ({ locations = [] }) => {
         {locations.length > 0 ? (
           <Container className={styles.bestGuessesContainer}>
             <Row className={styles.personalBestGuessesRow}>
-              {locations.slice(0, visibleCount).map((location, index) => (
+              {locations.slice(0, visibleCount).map((location) => (
                 <Col
-                  key={index}
+                  key={location.id}
                   sm={12}
                   md={6}
                   lg={4}
