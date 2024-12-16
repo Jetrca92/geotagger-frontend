@@ -40,8 +40,7 @@ const DeleteModal: FC<Props> = ({ show, locationId, onHide, onDelete }) => {
   const handleDelete = async () => {
     if (locationId) {
       try {
-        const response = await API.deleteLocation(token, locationId, dispatch)
-
+        await API.deleteLocation(token, locationId, dispatch)
         onHide()
         onDelete()
       } catch (error) {
