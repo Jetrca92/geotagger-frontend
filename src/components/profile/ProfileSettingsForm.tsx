@@ -62,6 +62,7 @@ const ProfileSettingsForm: FC<Props> = ({
       dispatch(updateUser({ user: response }))
       onHide()
       onSave()
+      if (!response) return
     } catch (error) {
       dispatch(
         setError({

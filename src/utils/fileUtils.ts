@@ -32,6 +32,7 @@ export const uploadUserAvatar = async (
       userId,
       dispatch,
     )
+    if (!imageResponse) return
     return imageResponse
   } catch {
     dispatch(
@@ -58,6 +59,7 @@ export const uploadLocationImage = async (
       id,
       dispatch,
     )
+    if (!imageResponse) return
     return imageResponse
   } catch {
     dispatch(

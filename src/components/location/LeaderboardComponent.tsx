@@ -11,7 +11,7 @@ interface Props {
   guesses: GuessType[]
 }
 
-const LeaderboardComponent: FC<Props> = ({ guesses }) => {
+const LeaderboardComponent: FC<Props> = ({ guesses = [] }) => {
   if (guesses.length === 0)
     return (
       <Container className={styles.leaderboardContainer}>
@@ -34,7 +34,7 @@ const LeaderboardComponent: FC<Props> = ({ guesses }) => {
                   <UserAvatar
                     avatarSrc={
                       guess.owner.avatarUrl
-                        ? guess.owner.avatarUrl
+                        ? guess?.owner?.avatarUrl
                         : sampleAvatar
                     }
                   />

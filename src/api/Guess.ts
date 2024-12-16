@@ -17,6 +17,7 @@ export const addGuess = async (
     AddLocationFields,
     LocationType
   >(apiMethods.POST, `${apiRoutes.GUESS_LOCATION_PREFIX}/${id}`, token, data)
+  console.log(response)
   if (response.data?.statusCode) {
     dispatch(setError({ type: ErrorType.API, message: response.data.message }))
     return

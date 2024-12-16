@@ -87,7 +87,7 @@ const LocationGuessForm: FC<Props> = ({ location, onNewGuess }) => {
 
     try {
       const response = await API.addGuess(token, location.id, data, dispatch)
-
+      if (!response) return
       onNewGuess(response)
       const errorDistance = errorDistanceString(response.errorDistance)
       setErrorDistance(errorDistance)

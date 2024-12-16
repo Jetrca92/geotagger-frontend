@@ -80,6 +80,7 @@ export const uploadLocationImage = async (
   )
   if (response.data?.statusCode) {
     dispatch(setError({ type: ErrorType.FILE, message: response.data.message }))
+    return
   }
   return response.data
 }

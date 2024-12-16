@@ -51,7 +51,8 @@ const ProfileSettingsPasswordForm: FC<Props> = ({ onHide, onSave }) => {
     const { confirmNewPassword, ...submitData } = data
 
     try {
-      await API.updateUserPassword(token, submitData, dispatch)
+      const response = await API.updateUserPassword(token, submitData, dispatch)
+      if (!response) return
       onHide()
       onSave()
     } catch (error) {

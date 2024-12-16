@@ -76,7 +76,7 @@ const AddLocationForm: FC = () => {
 
     try {
       const response = await API.addLocation(token, data, dispatch)
-
+      if (!response) return
       await uploadLocationImage(response.id, token, locationImageFile, dispatch)
 
       const locationsResponse = await API.getUserLocations(token)
