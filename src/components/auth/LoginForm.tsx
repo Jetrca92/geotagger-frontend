@@ -28,13 +28,8 @@ const LoginForm: FC = () => {
   const { handleSubmit, errors, control } = useLoginForm()
 
   const onSubmit = handleSubmit(async (data: LoginUserFields) => {
-    const response = await API.login(data)
-    if (response.data?.statusCode) {
-      dispatch(
-        setError({ type: ErrorType.API, message: response.data.message }),
-      )
-      return
-    }
+    const response = await API.login(data, dispatch)
+
     try {
       const user = await API.fetchUser(response.data.access_token)
       const userLocations = await API.getUserLocations(

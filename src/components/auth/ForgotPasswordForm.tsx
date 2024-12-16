@@ -5,14 +5,12 @@ import {
 import { FC, useEffect } from 'react'
 import { Button, Container, Form } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearAllErrors, setError } from 'stores/errorSlice'
+import { clearAllErrors } from 'stores/errorSlice'
 import { RootState } from 'stores/store'
 import styles from 'styles/scss/auth.module.scss'
 import * as API from 'api/Api'
-import { ErrorType } from 'constants/errorConstants'
 import { Controller } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import { routes } from 'constants/routesConstants'
 
 const ForgotPasswordForm: FC = () => {
   const dispatch = useDispatch()
@@ -28,14 +26,7 @@ const ForgotPasswordForm: FC = () => {
   const { handleSubmit, errors, control } = useForgotPasswordForm()
 
   const onSubmit = handleSubmit(async (data: ForgotPasswordFormFields) => {
-    const response = await API.forgotPassword(data)
-    if (response.data?.statusCode) {
-      dispatch(
-        setError({ type: ErrorType.API, message: response.data.message }),
-      )
-      return
-    }
-    navigate(routes.HOME)
+    await API.forgotPassword(data, dispatch, navigate)
   })
 
   return (

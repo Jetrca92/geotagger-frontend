@@ -58,11 +58,7 @@ const ProfileSettingsForm: FC<Props> = ({
       return
     }
     try {
-      const response = await API.updateUser(token, data)
-      if (response.statusCode) {
-        dispatch(setError({ type: ErrorType.API, message: response.message }))
-        return
-      }
+      const response = await API.updateUser(token, data, dispatch)
       dispatch(updateUser({ user: response }))
       onHide()
       onSave()

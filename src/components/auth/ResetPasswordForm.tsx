@@ -34,13 +34,7 @@ const ResetPasswordForm: FC<Props> = ({ token }) => {
   const onSubmit = handleSubmit(async (data: ResetPasswordFormFields) => {
     const { confirmNewPassword, ...submitData } = data
     try {
-      const response = await API.resetPassword(token, submitData)
-      if (response.data?.statusCode) {
-        dispatch(
-          setError({ type: ErrorType.API, message: response.data.message }),
-        )
-        return
-      }
+      await API.resetPassword(token, submitData, dispatch)
     } catch (error) {
       dispatch(
         setError({

@@ -26,13 +26,12 @@ export const uploadUserAvatar = async (
   try {
     const formData = new FormData()
     formData.append('image', file as File, file?.name)
-    const imageResponse = await API.uploadImage(token, formData, userId)
-
-    if (imageResponse.statusCode) {
-      dispatch(
-        setError({ type: ErrorType.FILE, message: imageResponse.message }),
-      )
-    }
+    const imageResponse = await API.uploadImage(
+      token,
+      formData,
+      userId,
+      dispatch,
+    )
     return imageResponse
   } catch {
     dispatch(
@@ -53,13 +52,12 @@ export const uploadLocationImage = async (
   try {
     const formData = new FormData()
     formData.append('image', file as File, file?.name)
-    const imageResponse = await API.uploadLocationImage(token, formData, id)
-
-    if (imageResponse.statusCode) {
-      dispatch(
-        setError({ type: ErrorType.FILE, message: imageResponse.message }),
-      )
-    }
+    const imageResponse = await API.uploadLocationImage(
+      token,
+      formData,
+      id,
+      dispatch,
+    )
     return imageResponse
   } catch {
     dispatch(

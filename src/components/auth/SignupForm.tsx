@@ -68,29 +68,15 @@ const SignupForm: FC = () => {
 
     const { confirmPassword, ...submitData } = data
     try {
-      const response = await API.signup(submitData)
+      const response = await API.signup(submitData, dispatch)
 
-      if (response.data?.statusCode) {
-        dispatch(
-          setError({ type: ErrorType.API, message: response.data.message }),
-        )
-        return
-      }
-
-      const loginResponse = await API.login({
-        email: data.email,
-        password: data.password,
-      })
-
-      if (loginResponse.data?.statusCode) {
-        dispatch(
-          setError({
-            type: ErrorType.API,
-            message: loginResponse.data.message,
-          }),
-        )
-        return
-      }
+      const loginResponse = await API.login(
+        {
+          email: data.email,
+          password: data.password,
+        },
+        dispatch,
+      )
 
       await uploadUserAvatar(
         loginResponse.data.access_token,
