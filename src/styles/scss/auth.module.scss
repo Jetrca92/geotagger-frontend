@@ -1,0 +1,254 @@
+.authPageContainer {
+  margin: 0px;
+  padding: 0px;
+  max-width: 1440px;
+  max-height: 1024px;
+
+  @media (max-width: 1024px) {
+    margin: 0px 20px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0px 10px;
+  }
+}
+
+.authPageRow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 0px;
+}
+
+.authPageLeftCol {
+  padding: 0px;
+  width: 620px;
+  height: 100%;
+  background-color: #ffffff;
+  padding: 32px 20px 0px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 128px;
+}
+
+.authPageNavbarLogo {
+  width: 171px;
+  height: 40px;
+}
+
+.authPageRightCol {
+  position: relative;
+  padding: 0px;
+  width: 100%;
+  max-height: 1024px;
+  background-image: url('../images/auth-geotagger-patern.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 2;
+}
+
+.authMapImage {
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  width: 820px;
+  height: 1024px;
+}
+
+.geotaggerRightIcon {
+  width: 202.42px;
+  height: 294px;
+  position: absolute;
+  top: 36%;
+  left: 39%;
+  z-index: 3;
+}
+
+.authFormContainer {
+  display: flex;
+  padding: 0px;
+  flex-direction: column;
+  gap: 16px;
+  width: 420px;
+  margin-left: 0px;
+}
+
+.authFormTitleContainer {
+  display: flex;
+  flex-direction: column;
+  width: 420px;
+  gap: 8px;
+}
+
+.titleText {
+  color: #233d4d;
+  text-align: center;
+}
+
+.authFormTitle {
+  @extend .titleText;
+  font-weight: 500;
+  line-height: 56.25px;
+  margin: 0px;
+}
+
+.authFormSubtitle {
+  @extend .titleText;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18.75px;
+}
+
+.labelText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  margin-bottom: 6.25px;
+}
+
+.formGroup {
+  margin-bottom: 16px;
+}
+
+.formGroupCentered {
+  @extend .formGroup;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.formControl {
+  height: 35px;
+
+  &:focus {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &:active {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &.error {
+    border: 1px solid #fda29b !important;
+    box-shadow: none;
+  }
+}
+
+.formButton {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  background: #619b8a;
+  border: 1px solid #619b8a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+
+  &:hover {
+    background-color: #468579;
+    border-color: #468579;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.createAccountText {
+  width: 100%;
+  height: 19px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+}
+
+.createAccountTextTypography {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
+
+.createAccountTextLeft {
+  @extend .createAccountTextTypography;
+  color: #233d4d;
+  text-align: left;
+}
+
+.createAccountTextRight {
+  @extend .createAccountTextTypography;
+  color: #619b8a;
+  text-align: right;
+  text-decoration: none;
+}
+
+.inputWithIcon {
+  position: relative;
+  width: 100%;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.emptyAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 64px;
+  background: #bdbdbd;
+}
+
+.emptyAvatarDiv {
+  height: 64px;
+  width: 64px;
+}
+
+.emptyAvatarIcon {
+  height: 16px;
+  width: 16px;
+}
+
+.userAvatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 64px;
+}
+
+.userAvatarImage {
+  border-radius: 64px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.formErrorText {
+  color: #f04438;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.addAvatarButton {
+  height: 64px;
+  width: 64px;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

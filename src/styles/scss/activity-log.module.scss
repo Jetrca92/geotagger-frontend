@@ -1,0 +1,118 @@
+.activitiesTableContainer {
+  padding: 0px;
+}
+
+.activitiesTable {
+  margin-bottom: 128px;
+}
+
+.activitiesTableHead {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #667085 !important;
+}
+
+.userTableHead {
+  @extend .activitiesTableHead;
+  width: 285px;
+}
+
+.middleTableHead {
+  @extend .activitiesTableHead;
+  width: 176px;
+}
+
+.locationTableHead {
+  @extend .activitiesTableHead;
+  width: 311px;
+}
+
+.userTableBody {
+  @extend .userTableHead;
+  font-weight: 600;
+  font-size: 14px;
+  color: #101828 !important;
+  vertical-align: middle;
+}
+
+.userTableBodyFlex {
+  display: flex;
+  gap: 12px;
+}
+
+.middleTableBody {
+  @extend .middleTableHead;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.locationTableBody {
+  @extend .locationTableHead;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.locationTableBodyRow {
+  height: 70px;
+}
+
+.fullTableWidth {
+  width: 100%;
+}
+
+.fullTableWidthCenter {
+  display: flex;
+  align-items: center;
+}
+
+.fullTableWidthDate {
+  @extend .fullTableWidth;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.emptyActivitiesDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.searchIconDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchIconImg {
+  width: 16px;
+  height: 16px;
+}
+
+.emptyActivitiesContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.emptyActivitiesTitle {
+  margin: 0px;
+  color: #101828;
+  font-weight: 400;
+  line-height: 28.13px;
+  text-align: center;
+}
+
+.emptyActivitiesText {
+  color: #667085;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  text-align: center;
+}
+
+.userAvatar {
+  width: 64px;
+  height: 64px;
+}

@@ -1,0 +1,544 @@
+.customButton {
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 8px 16px 8px 16px;
+  width: auto;
+  height: 36px;
+}
+
+.customGoogleSigninButton {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 6px 16px;
+  border-radius: 8px;
+  border: 1px solid #d0d5dd;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #344054;
+  margin-bottom: 16px;
+}
+
+.googleIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.customPrimaryButton {
+  @extend .customButton;
+  background-color: #619b8a;
+  border: 1px solid #619b8a;
+  color: #ffffff;
+
+  &:hover {
+    background-color: #468579;
+    border-color: #468579;
+  }
+
+  &:disabled {
+    background-color: #d0f5df;
+    border: 1px solid #d0f5df;
+    color: #ffffff;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.customSecondaryButton {
+  @extend .customButton;
+  background-color: #ffffff;
+  border: 1px solid #619b8a;
+  color: #619b8a;
+
+  &:hover {
+    background-color: #f9fafb;
+    border: 1px solid #468579;
+    color: #619b8a;
+  }
+
+  &:disabled {
+    background-color: #ffffff;
+    color: #d0f5df;
+    border: 1px solid #e7faed;
+  }
+
+  &:active {
+    background-color: #e1eceb !important;
+    border: 1px solid #3f7569 !important;
+    color: #619b8a !important;
+  }
+
+  &:focus {
+    background-color: #e1eceb !important;
+    border-color: #3f7569 !important;
+    color: #619b8a !important;
+  }
+}
+
+.customCancelButton {
+  @extend .customButton;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  color: #619b8a;
+
+  &:hover {
+    background-color: #ffffff;
+    border-color: #ffffff;
+    color: #619b8a;
+  }
+
+  &:disabled {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+    color: #619b8a;
+  }
+
+  &:active {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    color: #619b8a !important;
+  }
+
+  &:focus {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+  }
+}
+
+.customEditDeleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.customEditButton {
+  @extend .customEditDeleteButton;
+  background-color: #619b8a;
+  border: 1px solid #619b8a;
+
+  &:hover {
+    background-color: #468579;
+    border: 1px solid #468579;
+  }
+
+  &:disabled {
+    background-color: #d0f5df;
+    border: 1px solid #d0f5df;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.customDeleteButton {
+  @extend .customEditDeleteButton;
+  background-color: #9b6161;
+  border: 1px solid #9b6161;
+
+  &:hover {
+    background-color: #b47a7a;
+    border: 1px solid #b47a7a;
+  }
+
+  &:disabled {
+    background-color: #d3b8b8;
+    border: 1px solid #d3b8b8;
+  }
+
+  &:active {
+    background-color: #7e4d4d !important;
+    border-color: #7e4d4d !important;
+  }
+
+  &:focus {
+    background-color: #7e4d4d !important;
+    border-color: #7e4d4d !important;
+  }
+}
+
+.customAddButton {
+  @extend .customEditButton;
+  height: 40px;
+  width: 40px;
+  border-radius: 64px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.editIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.deleteIcon {
+  height: 14px;
+  width: 14px;
+}
+
+.addIcon {
+  width: 15px;
+  height: 15px;
+}
+
+.locationCard {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
+  position: relative;
+}
+
+.locationCardBody {
+  padding: 0px;
+  height: 235px;
+}
+
+.locationCardImage {
+  object-fit: cover;
+  width: 420px;
+  height: 235px;
+  object-fit: cover;
+  display: block;
+}
+
+.locationCardImageSm {
+  @extend .locationCardImage;
+  width: 310px;
+  height: 175px;
+}
+
+.lockedIcon {
+  position: absolute;
+  top: 45%;
+  left: 47%;
+}
+
+.guessText {
+  position: absolute;
+  top: 42%;
+  left: 42%;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 36px;
+}
+
+.locationCardImageSmEditButton {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+}
+
+.locationCardImageSmDeleteButton {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+.gradientOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(102, 159, 137, 0.6) 50%,
+    rgba(159, 193, 129, 0.6) 128%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.customUserProfileButtonWithPoints {
+  width: 101px;
+  padding: 0px 16px 0px 0px;
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 64px;
+  border: 2px solid #619b8a;
+  background: #ffffff;
+
+  &:hover {
+    background-color: #ffffff;
+    border: 2px solid #468579;
+  }
+
+  &:active {
+    background-color: #ffffff !important;
+    border: 2px solid #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #ffffff !important;
+    border: 2px solid #3f7569 !important;
+  }
+}
+
+.customUserProfileButton {
+  width: 40px;
+  height: 40px;
+  margin: 0px;
+  padding: 0px;
+  background: #ffffff;
+  border-radius: 64px;
+  border: 1px solid #ffffff;
+
+  &:hover {
+    background-color: #ffffff;
+    border: 1px solid #ffffff;
+  }
+
+  &:active {
+    background-color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+  }
+
+  &:focus {
+    background-color: #ffffff !important;
+    border: 1px solid #ffffff !important;
+  }
+}
+
+.customUserProfilePoints {
+  color: #000000;
+  font-weight: 500;
+  width: 37px;
+}
+
+.customModalBody {
+  background: #ffffff;
+  padding: 32px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 593px;
+}
+
+.customModalPasswordBody {
+  @extend .customModalBody;
+  gap: 32px !important;
+}
+
+.customModalTitle {
+  font-weight: 400;
+  line-height: 39.84px;
+  letter-spacing: 0.25px;
+  color: #232323;
+  margin: 0px;
+}
+
+.customModalTitleH5 {
+  color: #232323;
+  font-weight: 400;
+  line-height: 28.13px;
+  margin: 0px;
+}
+
+.customModalText {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  color: #232323;
+}
+
+.customModalButtons {
+  display: flex;
+  gap: 16px;
+  justify-content: end;
+}
+
+.blackText {
+  color: #000000;
+}
+
+.primaryText {
+  color: #619b8a;
+}
+
+.formButton {
+  width: 100%;
+  height: 36px;
+  border-radius: 8px;
+  background: #619b8a;
+  border: 1px solid #619b8a;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+
+  &:hover {
+    background-color: #468579;
+    border-color: #468579;
+  }
+
+  &:active {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+
+  &:focus {
+    background-color: #3f7569 !important;
+    border-color: #3f7569 !important;
+  }
+}
+
+.submitButtonDiv {
+  width: 110px;
+}
+
+.profileSettingsModalForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 529px;
+  padding: 0px;
+}
+
+.profileSettingsModalFormGroup {
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.profileSettingsModalFormLabelText {
+  color: #233d4d;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  margin: 0px;
+}
+
+.profileSettingsModalFormControl {
+  padding: 8px 16px;
+  height: 35px;
+  color: #000000;
+
+  &:focus {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &:active {
+    border: 1px solid #619b8a !important;
+    box-shadow: none;
+  }
+  &.error {
+    border: 1px solid #fda29b !important;
+    box-shadow: none;
+  }
+}
+
+.profileSettingsModalFormErrorText {
+  color: #f04438;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.profileSettingsModalFormRow {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 16px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.profileSettingsModalFormCol {
+  padding: 0px;
+}
+
+.profileSettingsLinksDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.profileSettingsLink {
+  cursor: pointer;
+  color: #619b8a;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.customUserProfileAvatarDiv {
+  height: 40px;
+  width: 40px;
+}
+
+.inputWithIcon {
+  position: relative;
+  width: 100%;
+}
+
+.eyeIcon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.emptyAvatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  border-radius: 64px;
+  background: #bdbdbd;
+}
+
+.formGroup {
+  margin-bottom: 32px;
+}
+
+.formGroupCentered {
+  @extend .formGroup;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+}
+
+.currentAvatarDiv {
+  height: 64px;
+  width: 64px;
+}

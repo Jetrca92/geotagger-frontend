@@ -1,0 +1,80 @@
+.userAvatarNameContainer {
+  padding: 0px;
+  height: 64px;
+  margin-bottom: 64px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.userAvatarNameText {
+  margin: 0px;
+  line-height: 39.84px;
+  letter-spacing: 0.25px;
+  color: #233d4d;
+}
+
+.userAvatarDiv {
+  width: 64px;
+  height: 64px;
+}
+
+.myBestGuessesContainer {
+  padding: 0px;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.myBestGuessesTitle {
+  color: #233d4d;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.13px;
+  padding: 0px;
+  margin: 0px;
+}
+
+.myBestGuessesEmptyContent {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.myBestGuessesEmptyContentText {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.myBestGuessesEmptyContentTextTitle {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18.75px;
+  color: #101828;
+}
+
+.myBestGuessesEmptyContentTextSubtitle {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.06px;
+  letter-spacing: 0.4px;
+  color: #667085;
+}
+
+.myBestGuessesRow {
+  row-gap: 10px;
+  column-gap: 19px;
+  margin: 0px;
+}
+
+.myBestGuessesCol {
+  padding: 0px;
+  max-width: 310px;
+}
+
+.loadMoreBtnDiv {
+  display: flex;
+  justify-content: center;
+}

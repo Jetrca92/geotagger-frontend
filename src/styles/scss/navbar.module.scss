@@ -1,0 +1,80 @@
+.navbarContainer {
+  margin: 0px 0px;
+  padding: 0px 71px;
+  max-width: 1440px;
+
+  @media (max-width: 1024px) {
+    margin: 0px 20px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0px 10px;
+  }
+}
+
+.customNavbar {
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 40px;
+  padding: 46px 0px;
+}
+
+.customContainers {
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbarButtonsContainer {
+  @extend .customContainers;
+  display: flex;
+  align-items: center;
+  width: 207px;
+  height: 36px;
+  gap: 16px;
+}
+
+.logoImage {
+  width: 171px;
+  height: 40px;
+}
+
+.link {
+  font-size: 16px;
+  line-height: 18.75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #233d4d;
+  text-decoration: none;
+}
+
+.linkCursor {
+  @extend .link;
+  cursor: pointer;
+}
+
+.signInLink {
+  @extend .link;
+  font-weight: 600;
+}
+
+.orText {
+  @extend .link;
+  font-weight: 400;
+}
+
+.navbarUserLinks {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  height: 40px;
+}
+
+.navbarUserButtonsContainer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}

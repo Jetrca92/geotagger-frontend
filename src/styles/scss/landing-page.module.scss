@@ -1,0 +1,157 @@
+.heroContainer {
+  margin-top: 68px;
+  margin-bottom: 55px;
+  padding: 0px;
+}
+
+.heroRow {
+  margin: 0px;
+  flex-wrap: nowrap;
+}
+
+.heroCard {
+  margin-top: 96px;
+  padding: 0px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 32px;
+  z-index: 2;
+}
+
+.heroImage {
+  display: flex;
+  flex: 1;
+  padding: 0px;
+  width: 1040px;
+  height: 585px;
+  margin-right: -71px;
+}
+
+.signUpHeroTitle {
+  color: #619b8a;
+  font-size: 61px;
+  font-weight: 500;
+  line-height: 70px;
+  letter-spacing: -0.5px;
+  text-align: left;
+  width: 343px;
+  height: 210px;
+}
+
+.signUpHeroText {
+  color: #233d4d;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  width: 419px;
+}
+
+.infoTextContainer {
+  margin-top: 56px;
+  margin-bottom: 64px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.infoTextTitle {
+  text-align: center;
+  color: #619b8a;
+  margin-bottom: 0px;
+}
+
+.infoTextSubtitle {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+  width: 587px;
+  color: #233d4d;
+}
+
+.landingCards {
+  padding: 0px;
+}
+
+.landingCardsRow {
+  margin: 0px;
+  margin-bottom: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.landingCardsCol {
+  padding: 0px;
+  width: 420px;
+  height: 235px;
+  flex: 0 0 auto;
+}
+
+.landingCardsButtonContainer {
+  @extend .landingCards;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 167px;
+}
+
+.personalBestGuessesContainer {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.personalBestGuessesTitleCard {
+  @extend .personalBestGuessesContainer;
+  margin-bottom: 0px !important;
+}
+
+.personalBestGuessesTitleDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.personalBestGuessesTitle {
+  padding: 0px;
+  margin: 0px;
+  color: #619b8a;
+  font-weight: 400;
+  line-height: 39.84px;
+  letter-spacing: 0.25px;
+}
+
+.personalBestGuessesSubtitle {
+  color: #233d4d;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18.75px;
+}
+
+.bestGuessesContainer {
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.personalBestGuessesRow {
+  row-gap: 19px;
+  column-gap: 19px;
+  margin: 0px;
+}
+
+.personalBestGuessesCol {
+  padding: 0px;
+  max-width: 420px;
+}
+
+.loadMoreBtnDiv {
+  display: flex;
+  justify-content: center;
+}
